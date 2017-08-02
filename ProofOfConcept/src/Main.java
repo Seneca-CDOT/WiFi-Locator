@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,9 +22,9 @@ public class Main {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 		window.add(pane);
+		saveNode.setPreferredSize(new Dimension (100,40));
 		pane.add(saveNode);
 		
-		saveNode.setSize(200, 200);
 		
 		saveNode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -31,13 +32,21 @@ public class Main {
 			}
 		});
 		
+		getInfo("iwconfig wlp2s0 grep \"Signal\""); //iwconfig wlp2s0 grep "Signal"
+		getInfo("iwconfig wlp2s0 grep \"Address\"");
+		getInfo("iwconfig wlp2s0 grep \"\"");
+		
+		
+	}
+	
+	public static void getInfo(String command) {
 		String s = null;
 
         try {
             
 	    // run the iwconfig wlp2s0 command
             // using the Runtime exec method:
-            Process p = Runtime.getRuntime().exec("iwconfig");
+            Process p = Runtime.getRuntime().exec(command); 
             
             BufferedReader stdInput = new BufferedReader(new 
                  InputStreamReader(p.getInputStream()));
@@ -64,7 +73,6 @@ public class Main {
             e.printStackTrace();
             System.exit(-1);
         }
-		
 		
 	}
 
