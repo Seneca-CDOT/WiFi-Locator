@@ -29,17 +29,18 @@ public class Main {
 		saveNode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("button pressed");
+				System.out.println(getInfo("iwconfig")); //iwconfig wlp2s0 grep "Signal"
+				getInfo("iwconfig wlp2s0 grep \"Address\"");
+				getInfo("iwconfig wlp2s0 grep \"\"");
 			}
 		});
 		
-		getInfo("iwconfig wlp2s0 grep \"Signal\""); //iwconfig wlp2s0 grep "Signal"
-		getInfo("iwconfig wlp2s0 grep \"Address\"");
-		getInfo("iwconfig wlp2s0 grep \"\"");
+		
 		
 		
 	}
 	
-	public static void getInfo(String command) {
+	public static String getInfo(String command) {
 		String s = null;
 
         try {
@@ -57,22 +58,24 @@ public class Main {
             // read the output from the command
             System.out.println("Here is the standard output of the command:\n");
             while ((s = stdInput.readLine()) != null) {
-                System.out.println(s);
+                return s;
             }
             
             // read any errors from the attempted command
             System.out.println("Here is the standard error of the command (if any):\n");
             while ((s = stdError.readLine()) != null) {
-                System.out.println(s);
+                return s;
             }
             
             System.exit(0);
+          
         }
         catch (IOException e) {
             System.out.println("Exception occurred.");
             e.printStackTrace();
             System.exit(-1);
         }
+		return s;
 		
 	}
 
