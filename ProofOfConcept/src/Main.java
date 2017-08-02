@@ -1,6 +1,6 @@
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,18 +26,17 @@ public class Main {
 		saveNode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("button pressed");
-				System.out.println(getInfo("iwconfig wlp2s0| grep \"Access\"")); // iwconfig wlp2s0| grep "Signal"
-				getInfo("iwconfig wlp2s0| grep \"Signal\"");
+				System.out.println(getInfo("Access")); // iwconfig wlp2s0| grep "Signal"
 
-				StringBuilder sbaddress = new StringBuilder(getInfo("iwconfig wlp2s0| grep \"Access\"")); //getting access point
-				for (int i = 0; i < 49; i++) {
+				StringBuilder sbaddress = new StringBuilder(getInfo("Access")); //getting access point
+				for (int i = 0; i < 27; i++) {
 					sbaddress.deleteCharAt(0);
 				}
 				String address = sbaddress.toString();
 				System.out.println(address);
 				
-				StringBuilder sbsignal = new StringBuilder(getInfo("iwconfig wlp2s0| grep \"Signal\"")); //getting signal strength
-				for (int i = 0; i < 33; i++) {
+				StringBuilder sbsignal = new StringBuilder(getInfo("Signal")); //getting signal strength
+				for (int i = 0; i < 10; i++) {
 					sbsignal.deleteCharAt(0);
 				}
 				String signal = sbsignal.toString();
@@ -55,7 +54,7 @@ public class Main {
 
 			// run the terminal command
 			// using the Runtime exec method:
-			Process p = Runtime.getRuntime().exec(command);
+			Process p = Runtime.getRuntime().exec("iwconfig wlp2s0");
 
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
@@ -64,7 +63,10 @@ public class Main {
 			// read the output from the command
 			System.out.println("Here is the standard output of the command:\n");
 			while ((s = stdInput.readLine()) != null) {
-				return s;
+				if(s.contains(command))
+				{
+					return s;
+				}
 			}
 
 			// read any errors from the attempted command
