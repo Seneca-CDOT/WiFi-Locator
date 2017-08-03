@@ -14,7 +14,9 @@ import java.util.List;
 import java.io.IOException;
 
 public class Main {
-
+	
+	static List<Node> nodes = new ArrayList<Node>();
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		JFrame window = new JFrame("Create Nodes");
@@ -39,42 +41,13 @@ public class Main {
 
 		// HashMap<List<String>, List<String>> nodes = new HashMap<List<String>,
 		// List<String>>();
-		List<Node> nodes = new ArrayList<Node>();
+		
 
 		saveNode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("saveNode button pressed");
-				System.out.println(getInfo("Access")); // iwconfig wlp2s0| grep "Signal"
-
-				List<String> Address = new ArrayList<String>();
-				List<String> Signal = new ArrayList<String>();
-				Address = getInfo("Address");
-				Signal = getInfo("Signal");
-				System.out.println(Signal.size());
-
-				for (int i = 0; i < Address.size(); i++) {
-					StringBuilder sbaddress = new StringBuilder(Address.get(i)); // getting access point
-					System.out.println(i);
-					
-					sbaddress.delete(0, 29);
-					String address = sbaddress.toString();
-					System.out.println(address);
-					Address.set(i, address);
-				}
-
-				for (int i = 0; i < Signal.size(); i++) {
-					StringBuilder sbsignal = new StringBuilder(Signal.get(i)); // getting signal strength
-
-					sbsignal.delete(0, 49);
-					sbsignal.delete(3, 7);
-					String signal = sbsignal.toString();
-					signal = signal.trim();
-					Signal.set(i, signal);
-					System.out.println(signal);
-				}
-
-				nodes.add(new Node(nodes.size() + 1, Address, Signal));
-
+				
+				nodes.add(GetOutput());
 			}
 		});
 
@@ -91,31 +64,9 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("findLocation button pressed");
 
-				List<String> currentAddress = new ArrayList<String>();
-				List<String> currentSignal = new ArrayList<String>();
-				currentAddress = getInfo("Address");
-				currentSignal = getInfo("Signal");
-
-				for (int i = 0; i < currentAddress.size(); i++) {
-					StringBuilder sbaddress = new StringBuilder(currentAddress.get(i)); // getting access point
-
-					sbaddress.delete(0, 29);
-					String address = sbaddress.toString();
-					System.out.println(address);
-					currentAddress.set(i, address);
-				}
-
-				for (int i = 0; i < currentSignal.size(); i++) {
-					StringBuilder sbsignal = new StringBuilder(currentSignal.get(i)); // getting signal strength
-
-					sbsignal.delete(0, 49);
-					sbsignal.delete(3, 7);
-					String signal = sbsignal.toString();
-					signal = signal.trim();
-					System.out.println(signal);
-					currentSignal.set(i, signal);
-				}
-
+				Node UPos = GetOutput();
+				
+				
 				int closestNode = 0;
 				int score = 100000;
 				int CurScore = 0;
@@ -123,15 +74,15 @@ public class Main {
 
 				System.out.println("Calculating Fuzzy Logic");
 				for (int i = 0; i < nodes.size(); i++) {
-					for (int j = 0; j < currentAddress.size(); j++) {
-						if (nodes.get(i).MacAddr.contains(currentAddress.get(j))) {
+					for (int j = 0; j < UPos.MacAddr.size(); j++) {
+						if (nodes.get(i).MacAddr.contains(UPos.MacAddr.get(j))) {
 							System.out.println("Calc " + j + " = " + Math.abs((Integer.parseInt(
-									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(currentAddress.get(j))))
-									- Integer.parseInt(currentSignal.get(j)))));
+									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(UPos.MacAddr.get(j))))
+									- Integer.parseInt(UPos.NodeStrength.get(j)))));
 							
 							CurScore += Math.abs(Integer.parseInt(
-									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(currentAddress.get(j))))
-									- Integer.parseInt(currentSignal.get(j)));
+									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(UPos.MacAddr.get(j))))
+									- Integer.parseInt(UPos.NodeStrength.get(j)));
 						counter++;
 						}
 						
@@ -154,7 +105,53 @@ public class Main {
 
 	}
 
-	public static List<String> getInfo(String command) {
+	public static Node GetOutput()
+	{
+		List<String> Address = new ArrayList<String>();
+		List<String> Signal = new ArrayList<String>();
+		List<String> ID = new ArrayList<String>();
+		
+		Address = getOutputRaw("Address");
+		Signal = getOutputRaw("Signal");
+		ID = getOutputRaw("ESSID");
+		
+
+		for (int i = 0; i < Address.size(); i++) {
+			StringBuilder sbaddress = new StringBuilder(Address.get(i)); // getting access point
+			
+			sbaddress.delete(0, 29);
+			String address = sbaddress.toString();
+			Address.set(i, address);
+			
+			System.out.println(address);
+		}
+
+		for (int i = 0; i < Signal.size(); i++) {
+			StringBuilder sbsignal = new StringBuilder(Signal.get(i)); // getting signal strength
+
+			sbsignal.delete(0, 49);
+			sbsignal.delete(3, 7);
+			String signal = sbsignal.toString();
+			signal = signal.trim();
+			Signal.set(i, signal);
+			
+			System.out.println(signal);
+		}
+		
+		for(int i = 0; i < ID.size(); i++)	{
+			StringBuilder sbID = new StringBuilder(ID.get(i));
+			
+			sbID.delete(0, 6);
+			sbID.delete(sbID.length()-1, sbID.length());
+			String address = sbID.toString();
+			Address.set(i, address);
+			
+		}
+
+		return new Node(nodes.size() + 1, Address, Signal, ID);
+	}
+	
+	public static List<String> getOutputRaw(String command) {
 		String s = null;
 		List<String> output = new ArrayList<String>();
 
