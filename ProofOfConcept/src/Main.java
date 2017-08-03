@@ -48,13 +48,15 @@ public class Main {
 
 				List<String> Address = new ArrayList<String>();
 				List<String> Signal = new ArrayList<String>();
-				Address = getInfo("Access");
+				Address = getInfo("Address");
 				Signal = getInfo("Signal");
+				System.out.println(Signal.size());
 
 				for (int i = 0; i < Signal.size(); i++) {
 					StringBuilder sbaddress = new StringBuilder(Address.get(i)); // getting access point
-
-					sbaddress.delete(0, 59);
+					System.out.println(i);
+					
+					sbaddress.delete(0, 29);
 					String address = sbaddress.toString();
 					System.out.println(address);
 					Address.set(i, address);
@@ -63,7 +65,7 @@ public class Main {
 				for (int i = 0; i < Signal.size(); i++) {
 					StringBuilder sbsignal = new StringBuilder(Signal.get(i)); // getting signal strength
 
-					sbsignal.delete(0, 44);
+					sbsignal.delete(0, 49);
 					sbsignal.delete(3, 7);
 					String signal = sbsignal.toString();
 					signal = signal.trim();
@@ -91,13 +93,13 @@ public class Main {
 
 				List<String> currentAddress = new ArrayList<String>();
 				List<String> currentSignal = new ArrayList<String>();
-				currentAddress = getInfo("Access");
+				currentAddress = getInfo("Address");
 				currentSignal = getInfo("Signal");
 
 				for (int i = 0; i < currentAddress.size(); i++) {
 					StringBuilder sbaddress = new StringBuilder(currentAddress.get(i)); // getting access point
 
-					sbaddress.delete(0, 59);
+					sbaddress.delete(0, 29);
 					String address = sbaddress.toString();
 					System.out.println(address);
 					currentAddress.set(i, address);
@@ -106,7 +108,7 @@ public class Main {
 				for (int i = 0; i < currentSignal.size(); i++) {
 					StringBuilder sbsignal = new StringBuilder(currentSignal.get(i)); // getting signal strength
 
-					sbsignal.delete(0, 44);
+					sbsignal.delete(0, 49);
 					sbsignal.delete(3, 7);
 					String signal = sbsignal.toString();
 					signal = signal.trim();
@@ -115,22 +117,32 @@ public class Main {
 				}
 
 				int closestNode = 0;
-				int score = -100000;
+				int score = 100000;
 				int CurScore = 0;
+				int counter = 1;
 
 				for (int i = 0; i < nodes.size(); i++) {
 					for (int j = 0; j < currentAddress.size(); j++) {
 						if (nodes.get(i).MacAddr.contains(currentAddress.get(j))) {
-							System.out.println(nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(currentAddress.get(j))).length());
-							
-							CurScore += Integer.parseInt(
+							System.out.println("YO " + Math.abs((Integer.parseInt(
 									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(currentAddress.get(j))))
-									- Integer.parseInt(currentSignal.get(j));
+									- Integer.parseInt(currentSignal.get(j)))));
+							
+							CurScore += Math.abs(Integer.parseInt(
+									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(currentAddress.get(j))))
+									- Integer.parseInt(currentSignal.get(j)));
+						counter++;
 						}
+						
 					}
-					if (CurScore  > score) {
+					
+					CurScore = CurScore/counter;
+					
+					System.out.println(CurScore);
+					if (CurScore  < score) {
+						System.out.println("hello");
 						score = CurScore;
-						closestNode = i++;
+						closestNode = i + 1;
 					}
 				}
 				System.out.println(closestNode + "Closest Node Is");
