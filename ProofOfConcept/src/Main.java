@@ -11,12 +11,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-
+import java.io.IOException;
 
 public class Main {
-	
-	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -24,6 +21,7 @@ public class Main {
 		JButton saveNode = new JButton();
 		JPanel pane = new JPanel();
 		JButton findLocation = new JButton();
+		JButton createCSV = new JButton();
 
 		saveNode.setText("Create New Node");
 		window.setSize(500, 500);
@@ -35,10 +33,13 @@ public class Main {
 		findLocation.setText("Find Location");
 		findLocation.setPreferredSize(new Dimension(200, 40));
 		pane.add(findLocation);
+		createCSV.setText("Create CSV");
+		createCSV.setPreferredSize(new Dimension(200, 40));
+		pane.add(createCSV);
 
-		//HashMap<List<String>, List<String>> nodes = new HashMap<List<String>, List<String>>();
+		// HashMap<List<String>, List<String>> nodes = new HashMap<List<String>,
+		// List<String>>();
 		List<Node> nodes = new ArrayList<Node>();
-		
 
 		saveNode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -69,8 +70,17 @@ public class Main {
 					Signal.set(i, signal);
 				}
 
-				nodes.add(new Node(nodes.size()+1, Address, Signal));
+				nodes.add(new Node(nodes.size() + 1, Address, Signal));
 				System.out.println(Address.size());
+
+			}
+		});
+
+		createCSV.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("CSV Button pressed");
+				CSV csv = new CSV(nodes);
+				csv.writeFile();
 
 			}
 		});
@@ -106,17 +116,16 @@ public class Main {
 				int closestNode = 0;
 				int score = -100000;
 				int CurScore = 0;
-				
+
 				for (int i = 0; i < nodes.size(); i++) {
-					for(int j = 0; j < currentAddress.size(); j++)
-					{
-						if(nodes.get(i).MacAddr.contains(currentAddress.get(j)))
-						{
-							CurScore += Integer.parseInt(nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(currentAddress.get(j)))) - Integer.parseInt(currentSignal.get(j));
+					for (int j = 0; j < currentAddress.size(); j++) {
+						if (nodes.get(i).MacAddr.contains(currentAddress.get(j))) {
+							CurScore += Integer.parseInt(
+									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(currentAddress.get(j))))
+									- Integer.parseInt(currentSignal.get(j));
 						}
 					}
-					if(CurScore < score)
-					{
+					if (CurScore < score) {
 						score = CurScore;
 						closestNode = i;
 					}
