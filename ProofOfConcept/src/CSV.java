@@ -21,6 +21,7 @@ public class CSV {
 				output.write(list.get(i).NodeNum); 
 				output.write(list.get(i).MacAddr.toString()); 
 				output.write(list.get(i).NodeStrength.toString());
+				output.write("\r\n");
 			}
 			
 			System.out.println("data is in file");
