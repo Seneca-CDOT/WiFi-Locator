@@ -121,10 +121,11 @@ public class Main {
 				int CurScore = 0;
 				int counter = 1;
 
+				System.out.println("Calculating Fuzzy Logic");
 				for (int i = 0; i < nodes.size(); i++) {
 					for (int j = 0; j < currentAddress.size(); j++) {
 						if (nodes.get(i).MacAddr.contains(currentAddress.get(j))) {
-							System.out.println("YO " + Math.abs((Integer.parseInt(
+							System.out.println("Calc " + j + Math.abs((Integer.parseInt(
 									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(currentAddress.get(j))))
 									- Integer.parseInt(currentSignal.get(j)))));
 							
@@ -136,16 +137,17 @@ public class Main {
 						
 					}
 					
+					System.out.println("Finished Calc of Node " + i);
+					
 					CurScore = CurScore/counter;
 					
 					System.out.println(CurScore);
 					if (CurScore  < score) {
-						System.out.println("hello");
 						score = CurScore;
 						closestNode = i + 1;
 					}
 				}
-				System.out.println(closestNode + "Closest Node Is");
+				System.out.println("Closest Node Is " + closestNode);
 
 			}
 		});
