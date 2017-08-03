@@ -103,10 +103,17 @@ public class Main {
 					currentSignal.set(i, signal);
 				}
 
+				int closestNode = 0;
+				int score = -100000;
+				int CurScore = 0;
+				
 				for (int i = 0; i < nodes.size(); i++) {
 					for(int j = 0; j < currentAddress.size(); j++)
 					{
-						
+						if(nodes.get(i).MacAddr.contains(currentAddress.get(j)))
+						{
+							CurScore += Integer.parseInt(nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(nodes.get(i).MacAddr.contains(currentAddress.get(j))))) - Integer.parseInt(currentSignal.get(j));
+						}
 					}
 				}
 
