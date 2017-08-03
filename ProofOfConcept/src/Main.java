@@ -12,7 +12,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
+
 public class Main {
+	
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -32,7 +36,9 @@ public class Main {
 		findLocation.setPreferredSize(new Dimension(200, 40));
 		pane.add(findLocation);
 
-		HashMap<List<String>, List<String>> nodes = new HashMap<List<String>, List<String>>();
+		//HashMap<List<String>, List<String>> nodes = new HashMap<List<String>, List<String>>();
+		List<Node> nodes = new ArrayList<Node>();
+		
 
 		saveNode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -63,7 +69,7 @@ public class Main {
 					Signal.set(i, signal);
 				}
 
-				nodes.put(Address, Signal);
+				nodes.add(new Node(nodes.size()+1, Address, Signal));
 				System.out.println(Address.size());
 
 			}
@@ -98,10 +104,9 @@ public class Main {
 				}
 
 				for (int i = 0; i < nodes.size(); i++) {
-					if (currentAddress == nodes.get(key)) {
-						for (int j = 0;j<currentAddress.size();j++) {
-							
-						}
+					for(int j = 0; j < currentAddress.size(); j++)
+					{
+						
 					}
 				}
 
