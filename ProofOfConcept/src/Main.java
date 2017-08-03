@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
 
@@ -17,18 +18,17 @@ public class Main {
 		JFrame window = new JFrame("Create Nodes");
 		JButton saveNode = new JButton();
 		JPanel pane = new JPanel();
-		JLabel text = new JLabel();
-		
-		text.setVisible(true);
-		text.setPreferredSize(new Dimension(200, 20));
-		text.setText("Create New Node		Find Closest Node");
+
+		saveNode.setText("Create New Node");
 		window.setSize(500, 500);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 		window.add(pane);
-		saveNode.setPreferredSize(new Dimension(100, 40));
+		saveNode.setPreferredSize(new Dimension(200, 40));
 		pane.add(saveNode);
-		pane.add(text);
+		
+		HashMap<ArrayList<String>, ArrayList<String>> nodes = new HashMap<ArrayList<String>, ArrayList<String>>();
+
 
 		saveNode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -48,6 +48,7 @@ public class Main {
 					sbaddress.delete(0, 59);
 					String address = sbaddress.toString();
 					System.out.println(address);
+					Address.set(i, address);
 				}
 				
 				for(int i = 0; i < Signal.size(); i++)
@@ -58,7 +59,10 @@ public class Main {
 					sbsignal.delete(3, 7);
 					String signal = sbsignal.toString();
 					System.out.println(signal);
+					Signal.set(i, signal);
 				}
+				
+				nodes.put(Address, Signal);
 				
 			}
 		});
