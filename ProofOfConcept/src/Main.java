@@ -52,7 +52,7 @@ public class Main {
 				Signal = getInfo("Signal");
 				System.out.println(Signal.size());
 
-				for (int i = 0; i < Signal.size(); i++) {
+				for (int i = 0; i < Address.size(); i++) {
 					StringBuilder sbaddress = new StringBuilder(Address.get(i)); // getting access point
 					System.out.println(i);
 					
@@ -125,7 +125,7 @@ public class Main {
 				for (int i = 0; i < nodes.size(); i++) {
 					for (int j = 0; j < currentAddress.size(); j++) {
 						if (nodes.get(i).MacAddr.contains(currentAddress.get(j))) {
-							System.out.println("Calc " + j + Math.abs((Integer.parseInt(
+							System.out.println("Calc " + j + " = " + Math.abs((Integer.parseInt(
 									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(currentAddress.get(j))))
 									- Integer.parseInt(currentSignal.get(j)))));
 							
@@ -163,7 +163,13 @@ public class Main {
 			// run the terminal command
 			// using the Runtime exec method:
 			Process p = Runtime.getRuntime().exec("iwlist wlp2s0 scan");
-
+			
+			try {
+			    Thread.sleep(5000);                 //1000 milliseconds is one second.
+			} catch(InterruptedException ex) {
+			    Thread.currentThread().interrupt();
+			}
+			
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
 			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
