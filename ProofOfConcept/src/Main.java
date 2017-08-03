@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.io.*;
@@ -16,13 +17,18 @@ public class Main {
 		JFrame window = new JFrame("Create Nodes");
 		JButton saveNode = new JButton();
 		JPanel pane = new JPanel();
-
+		JLabel text = new JLabel();
+		
+		text.setVisible(true);
+		text.setPreferredSize(new Dimension(200, 20));
+		text.setText("Create New Node		Find Closest Node");
 		window.setSize(500, 500);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 		window.add(pane);
 		saveNode.setPreferredSize(new Dimension(100, 40));
 		pane.add(saveNode);
+		pane.add(text);
 
 		saveNode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
