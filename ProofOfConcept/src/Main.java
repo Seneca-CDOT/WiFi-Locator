@@ -19,6 +19,7 @@ public class Main {
 		JFrame window = new JFrame("Create Nodes");
 		JButton saveNode = new JButton();
 		JPanel pane = new JPanel();
+		JButton findLocation = new JButton();
 
 		saveNode.setText("Create New Node");
 		window.setSize(500, 500);
@@ -27,34 +28,33 @@ public class Main {
 		window.add(pane);
 		saveNode.setPreferredSize(new Dimension(200, 40));
 		pane.add(saveNode);
-		
-		HashMap<List<String>, List<String>> nodes = new HashMap<List<String>, List<String>>();
+		findLocation.setText("Find Location");
+		findLocation.setPreferredSize(new Dimension(200, 40));
+		pane.add(findLocation);
 
+		HashMap<List<String>, List<String>> nodes = new HashMap<List<String>, List<String>>();
 
 		saveNode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("button pressed");
+				System.out.println("saveNode button pressed");
 				System.out.println(getInfo("Access")); // iwconfig wlp2s0| grep "Signal"
-				
+
 				List<String> Address = new ArrayList<String>();
 				List<String> Signal = new ArrayList<String>();
 				Address = getInfo("Access");
 				Signal = getInfo("Signal");
-				
-				
-				for(int i = 0; i < Signal.size(); i++)
-				{
-					StringBuilder sbaddress = new StringBuilder(Address.get(i)); //getting access point
+
+				for (int i = 0; i < Signal.size(); i++) {
+					StringBuilder sbaddress = new StringBuilder(Address.get(i)); // getting access point
 
 					sbaddress.delete(0, 59);
 					String address = sbaddress.toString();
 					System.out.println(address);
 					Address.set(i, address);
 				}
-				
-				for(int i = 0; i < Signal.size(); i++)
-				{
-					StringBuilder sbsignal = new StringBuilder(Signal.get(i)); //getting signal strength
+
+				for (int i = 0; i < Signal.size(); i++) {
+					StringBuilder sbsignal = new StringBuilder(Signal.get(i)); // getting signal strength
 
 					sbsignal.delete(0, 43);
 					sbsignal.delete(3, 7);
@@ -62,9 +62,49 @@ public class Main {
 					System.out.println(signal);
 					Signal.set(i, signal);
 				}
-				
+
 				nodes.put(Address, Signal);
-				
+				System.out.println(Address.size());
+
+			}
+		});
+
+		findLocation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("findLocation button pressed");
+
+				List<String> currentAddress = new ArrayList<String>();
+				List<String> currentSignal = new ArrayList<String>();
+				currentAddress = getInfo("Access");
+				currentSignal = getInfo("Signal");
+
+				for (int i = 0; i < currentAddress.size(); i++) {
+					StringBuilder sbaddress = new StringBuilder(currentAddress.get(i)); // getting access point
+
+					sbaddress.delete(0, 59);
+					String address = sbaddress.toString();
+					System.out.println(address);
+					currentAddress.set(i, address);
+				}
+
+				for (int i = 0; i < currentSignal.size(); i++) {
+					StringBuilder sbsignal = new StringBuilder(currentSignal.get(i)); // getting signal strength
+
+					sbsignal.delete(0, 43);
+					sbsignal.delete(3, 7);
+					String signal = sbsignal.toString();
+					System.out.println(signal);
+					currentSignal.set(i, signal);
+				}
+
+				for (int i = 0; i < nodes.size(); i++) {
+					if (currentAddress == nodes.get(key)) {
+						for (int j = 0;j<currentAddress.size();j++) {
+							
+						}
+					}
+				}
+
 			}
 		});
 
@@ -75,8 +115,7 @@ public class Main {
 		List<String> output = new ArrayList<String>();
 
 		try {
-			
-			
+
 			// run the terminal command
 			// using the Runtime exec method:
 			Process p = Runtime.getRuntime().exec("iwconfig wlp2s0");
@@ -86,21 +125,19 @@ public class Main {
 			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
 			// read the output from the command
-			//System.out.println("Here is the standard output of the command:\n");
+			// System.out.println("Here is the standard output of the command:\n");
 			while ((s = stdInput.readLine()) != null) {
-				if(s.contains(command))
-				{
+				if (s.contains(command)) {
 					System.out.println(s);
 					output.add(s);
 				}
 			}
 
 			// read any errors from the attempted command
-			//System.out.println("Here is the standard error of the command (if any):\n");
+			// System.out.println("Here is the standard error of the command (if any):\n");
 			while ((s = stdError.readLine()) != null) {
 				return output;
 			}
-
 
 		} catch (IOException e) {
 			System.out.println("Exception occurred.");
