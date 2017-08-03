@@ -12,5 +12,6 @@ public class Node {
 		NodeStrength = Strength;
 		
 	}
+	
 
 }
