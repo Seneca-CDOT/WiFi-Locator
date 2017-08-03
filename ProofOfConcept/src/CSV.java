@@ -19,6 +19,9 @@ public class CSV {
 
 			for (int i = 0; i < list.size(); i++) {
 				output.write(list.get(i).NodeNum); 
+				for (int j = 0;j<list.get(i).MacAddr.size();j++) {
+					output.write(list.get(i).MacAddr.get(j).toString());
+				}
 				output.write(list.get(i).MacAddr.toString()); 
 				output.write(list.get(i).NodeStrength.toString());
 				output.write("\r\n");

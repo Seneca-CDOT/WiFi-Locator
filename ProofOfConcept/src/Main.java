@@ -63,15 +63,15 @@ public class Main {
 				for (int i = 0; i < Signal.size(); i++) {
 					StringBuilder sbsignal = new StringBuilder(Signal.get(i)); // getting signal strength
 
-					sbsignal.delete(0, 43);
+					sbsignal.delete(0, 44);
 					sbsignal.delete(3, 7);
 					String signal = sbsignal.toString();
-					System.out.println(signal);
+					signal = signal.trim();
 					Signal.set(i, signal);
+					System.out.println(signal);
 				}
 
 				nodes.add(new Node(nodes.size() + 1, Address, Signal));
-				System.out.println(Address.size());
 
 			}
 		});
@@ -106,9 +106,10 @@ public class Main {
 				for (int i = 0; i < currentSignal.size(); i++) {
 					StringBuilder sbsignal = new StringBuilder(currentSignal.get(i)); // getting signal strength
 
-					sbsignal.delete(0, 43);
+					sbsignal.delete(0, 44);
 					sbsignal.delete(3, 7);
 					String signal = sbsignal.toString();
+					signal = signal.trim();
 					System.out.println(signal);
 					currentSignal.set(i, signal);
 				}
@@ -120,17 +121,19 @@ public class Main {
 				for (int i = 0; i < nodes.size(); i++) {
 					for (int j = 0; j < currentAddress.size(); j++) {
 						if (nodes.get(i).MacAddr.contains(currentAddress.get(j))) {
+							System.out.println(nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(currentAddress.get(j))).length());
+							
 							CurScore += Integer.parseInt(
 									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(currentAddress.get(j))))
 									- Integer.parseInt(currentSignal.get(j));
 						}
 					}
-					if (CurScore < score) {
+					if (CurScore  > score) {
 						score = CurScore;
-						closestNode = i;
+						closestNode = i++;
 					}
 				}
-				System.out.println(closestNode);
+				System.out.println(closestNode + "Closest Node Is");
 
 			}
 		});
@@ -145,7 +148,7 @@ public class Main {
 
 			// run the terminal command
 			// using the Runtime exec method:
-			Process p = Runtime.getRuntime().exec("iwconfig wlp2s0");
+			Process p = Runtime.getRuntime().exec("iwlist wlp2s0 scan");
 
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
