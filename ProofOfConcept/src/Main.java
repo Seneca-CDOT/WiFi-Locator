@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Main {
 
@@ -27,7 +28,7 @@ public class Main {
 		saveNode.setPreferredSize(new Dimension(200, 40));
 		pane.add(saveNode);
 		
-		HashMap<ArrayList<String>, ArrayList<String>> nodes = new HashMap<ArrayList<String>, ArrayList<String>>();
+		HashMap<List<String>, List<String>> nodes = new HashMap<List<String>, List<String>>();
 
 
 		saveNode.addActionListener(new ActionListener() {
@@ -35,8 +36,8 @@ public class Main {
 				System.out.println("button pressed");
 				System.out.println(getInfo("Access")); // iwconfig wlp2s0| grep "Signal"
 				
-				ArrayList<String> Address = new ArrayList<String>();
-				ArrayList<String> Signal = new ArrayList<String>();
+				List<String> Address = new ArrayList<String>();
+				List<String> Signal = new ArrayList<String>();
 				Address = getInfo("Access");
 				Signal = getInfo("Signal");
 				
@@ -69,9 +70,9 @@ public class Main {
 
 	}
 
-	public static ArrayList<String> getInfo(String command) {
+	public static List<String> getInfo(String command) {
 		String s = null;
-		ArrayList<String> output = new ArrayList<String>();
+		List<String> output = new ArrayList<String>();
 
 		try {
 			
@@ -89,8 +90,8 @@ public class Main {
 			while ((s = stdInput.readLine()) != null) {
 				if(s.contains(command))
 				{
-					output.add(output.size()+1, s);
-					
+					System.out.println(s);
+					output.add(s);
 				}
 			}
 
@@ -100,7 +101,6 @@ public class Main {
 				return output;
 			}
 
-			System.exit(0);
 
 		} catch (IOException e) {
 			System.out.println("Exception occurred.");
