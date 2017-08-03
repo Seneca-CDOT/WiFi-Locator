@@ -112,10 +112,16 @@ public class Main {
 					{
 						if(nodes.get(i).MacAddr.contains(currentAddress.get(j)))
 						{
-							CurScore += Integer.parseInt(nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(nodes.get(i).MacAddr.contains(currentAddress.get(j))))) - Integer.parseInt(currentSignal.get(j));
+							CurScore += Integer.parseInt(nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(currentAddress.get(j)))) - Integer.parseInt(currentSignal.get(j));
 						}
 					}
+					if(CurScore < score)
+					{
+						score = CurScore;
+						closestNode = i;
+					}
 				}
+				System.out.println(closestNode);
 
 			}
 		});
