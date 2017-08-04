@@ -78,7 +78,7 @@ public class Main {
 						if (nodes.get(i).MacAddr.contains(UPos.MacAddr.get(j))) {
 							System.out.println("Calc " + j + " = " + Math.abs((Integer.parseInt(
 									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(UPos.MacAddr.get(j))))
-									- Integer.parseInt(UPos.NodeStrength.get(j)))));
+									- Integer.parseInt(UPos.NodeStrength.get(j)))) + " ESSID of " + UPos.SSID.get(j));
 							
 							CurScore += Math.abs(Integer.parseInt(
 									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(UPos.MacAddr.get(j))))
