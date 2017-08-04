@@ -6,9 +6,9 @@ import java.util.List;
 public class LocationCSV {
 	Node location;
 	int closestNode;
-	int[] scores;
+	List<Integer> scores;
 
-	public LocationCSV(Node UPos, int closestNode, int[] scores) {
+	public LocationCSV(Node UPos, int closestNode, List<Integer> scores) {
 		location = UPos;
 		this.closestNode = closestNode;
 		this.scores = scores;
@@ -33,10 +33,10 @@ public class LocationCSV {
 			}
 			output.write("Calculations");
 			output.write("\r\n");
-			for (int j = 0; j < scores.length;j++) {
+			for (int j = 0; j < scores.size();j++) {
 				output.write(j);
 				output.write(",");
-				output.write(scores[j]);
+				output.write(scores.get(j));
 				output.write("\r\n");
 			}
 
