@@ -143,8 +143,8 @@ public class Main {
 			
 			sbID.delete(0, 6);
 			sbID.delete(sbID.length()-1, sbID.length());
-			String address = sbID.toString();
-			Address.set(i, address);
+			String ssid = sbID.toString();
+			Address.set(i, ssid);
 			
 		}
 
