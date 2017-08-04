@@ -169,7 +169,7 @@ public class Main {
 			Process p = Runtime.getRuntime().exec("iwlist wlp2s0 scan");
 			
 			try {
-			    Thread.sleep(5000);                 //1000 milliseconds is one second.
+			    Thread.sleep(3000);                 //1000 milliseconds is one second.
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}
