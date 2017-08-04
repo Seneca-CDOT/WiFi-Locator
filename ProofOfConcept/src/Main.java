@@ -141,10 +141,12 @@ public class Main {
 		for(int i = 0; i < ID.size(); i++)	{
 			StringBuilder sbID = new StringBuilder(ID.get(i));
 			
-			sbID.delete(0, 6);
+			
+			sbID.delete(0, 27);
 			sbID.delete(sbID.length()-1, sbID.length());
+			System.out.println(sbID);
 			String ssid = sbID.toString();
-			Address.set(i, ssid);
+			ID.set(i, ssid);
 			
 		}
 
