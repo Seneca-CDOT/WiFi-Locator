@@ -1,8 +1,21 @@
 #!/bin/bash
-# Push to Github
+#Commit and Push to Github
 
 echo Starting Push
-git add .
+echo Would you like to choose one file? [y/n]
+
+read UsrInput
+
+if [ "$UsrInput" = "y" ]
+then
+	echo enter in file name
+	read FileName
+	cd src
+	git add $FileName
+else
+	git add .
+fi
+
 echo Enter your commit message: 
 
 read MessageVar
