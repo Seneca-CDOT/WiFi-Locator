@@ -197,6 +197,8 @@ public class Main {
 
 		while (output <= 1) {
 			output = 0;
+			out.clear();
+			
 			try {
 				p = Runtime.getRuntime().exec("iwlist wlp2s0 scan");
 
