@@ -18,10 +18,14 @@ public class CSV {
 			FileWriter output = new FileWriter(survey, true);
 
 			for (int i = 0; i < list.size(); i++) {
-				output.write(list.get(i).NodeNum); 
+				output.write(list.get(i).NodeNum);
+				output.write("\r\n");
 				for (int j = 0;j<list.get(i).MacAddr.size();j++) {
 					output.write(list.get(i).MacAddr.get(j).toString());
-					output.write(list.get(i).NodeStrength.toString());
+					output.write(",");
+					output.write(list.get(i).SSID.get(j).toString());
+					output.write(",");
+					output.write(list.get(i).NodeStrength.get(j).toString());
 					output.write("\r\n");
 				}
 				output.write("\r\n");
