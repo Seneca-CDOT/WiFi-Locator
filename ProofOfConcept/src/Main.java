@@ -111,9 +111,11 @@ public class Main {
 		List<String> Signal = new ArrayList<String>();
 		List<String> ID = new ArrayList<String>();
 		
-		Address = getOutputRaw("Address");
-		Signal = getOutputRaw("Signal");
-		ID = getOutputRaw("ESSID");
+		Process TermRaw = getTerminalOut();
+		
+		Address = getOutputRaw("Address", TermRaw);
+		Signal = getOutputRaw("Signal", TermRaw);
+		ID = getOutputRaw("ESSID", TermRaw);
 		
 
 		for (int i = 0; i < Address.size(); i++) {
@@ -153,55 +155,66 @@ public class Main {
 		return new Node(nodes.size() + 1, Address, Signal, ID);
 	}
 	
-	public static List<String> getOutputRaw(String command) {
+	public static Process getTerminalOut()
+	{
+		
+		String s = null;
+		Process p = null;
+		int output = 0;
+		
+		while(output <= 1)	{
+			output = 0;
+			try {
+				p = Runtime.getRuntime().exec("iwlist wlp2s0 scan");
+			
+				try {
+					Thread.sleep(3000);                 //1000 milliseconds is one second.
+				} catch(InterruptedException ex) {
+					Thread.currentThread().interrupt();
+				}
+			
+				BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+			
+				while((s = stdInput.readLine()) != null) {
+				
+					if (s.contains("Cell")) {
+						System.out.println(s);
+						output++;
+					}
+				}
+			
+				
+			} catch(IOException e)	{
+				return null;
+			}
+		}
+		return p;
+		
+	}
+	
+	public static List<String> getOutputRaw(String command, Process p) {
 		
 		String s = null;
 		List<String> output = new ArrayList<String>();
 
-		while(output.size() <= 1)
-		{
-			output.clear();
-			
+		
+		BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
 		try {
-
-			// run the terminal command
-			// using the Runtime exec method:
-			Process p = Runtime.getRuntime().exec("iwlist wlp2s0 scan");
-			
-			try {
-			    Thread.sleep(3000);                 //1000 milliseconds is one second.
-			} catch(InterruptedException ex) {
-			    Thread.currentThread().interrupt();
-			}
-			
-			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-
-			// read the output from the command
-			// System.out.println("Here is the standard output of the command:\n");
-			while((s = stdInput.readLine()) != null) {
+		while((s = stdInput.readLine()) != null) {
 				
-				if (s.contains(command)) {
-					System.out.println(s);
-					output.add(s);
-				}
+			if (s.contains(command)) {
+				System.out.println(s);
+				output.add(s);
 			}
+		}
+		} catch(IOException e)	{
 			
-			System.out.println("Output size is = " + output.size());
+		}
 			
-			// read any errors from the attempted command
-			// System.out.println("Here is the standard error of the command (if any):\n");
-			while ((s = stdError.readLine()) != null) {
-				return output;
-			}
+		System.out.println("Output size is = " + output.size());
 
-		} catch (IOException e) {
-			System.out.println("Exception occurred.");
-			e.printStackTrace();
-			System.exit(-1);
-		}
-		}
+
 		return output;
 
 	}
