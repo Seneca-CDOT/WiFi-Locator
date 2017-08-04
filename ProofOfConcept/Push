@@ -1,0 +1,12 @@
+#!/bin/bash
+# Push to Github
+
+echo Starting Push
+git add .
+echo Enter your commit message: 
+
+read MessageVar
+
+git commit -m "$MessageVar"
+
+git push origin master
