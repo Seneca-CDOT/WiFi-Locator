@@ -83,8 +83,51 @@ public class Main {
 							CurScore += Math.abs(Integer.parseInt(
 									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(UPos.MacAddr.get(j))))
 									- Integer.parseInt(UPos.NodeStrength.get(j)));
+							
+							
 						counter++;
 						}
+							List<String> UPosSeneca = new ArrayList<String>();
+							List<String> NodeSeneca = new ArrayList<String>();
+							
+						for(int q = 0; q < nodes.get(i).SSID.size(); q++)
+						{
+							if(nodes.get(i).SSID.get(q).equals("SenecaNET"))
+							{
+								NodeSeneca.add(nodes.get(i).MacAddr.get(q));
+							}
+						}
+						for(int q = 0; q < UPos.SSID.size(); q++)
+						{
+							if(UPos.SSID.get(q).equals("SenecaNET"))
+							{
+								UPosSeneca.add(UPos.MacAddr.get(q));
+							}
+						}
+						
+						if(UPosSeneca.size() > NodeSeneca.size())
+						{
+							for(int q = 0; q < NodeSeneca.size(); q++)
+							{
+								if(!UPosSeneca.contains(NodeSeneca.get(q)))
+								{
+									CurScore += 10;
+								}
+							}
+							CurScore += ((UPosSeneca.size() - NodeSeneca.size()) * 10);
+						}
+						else
+						{
+							for(int q = 0; q < UPosSeneca.size(); q++)
+							{
+								if(!NodeSeneca.contains(UPosSeneca.get(q)))
+								{
+									CurScore += 10;
+								}
+							}
+							CurScore += ((NodeSeneca.size() - UPosSeneca.size()) * 10);
+						}
+						
 						
 					}
 					
