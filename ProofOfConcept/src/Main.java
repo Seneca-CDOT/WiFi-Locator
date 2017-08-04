@@ -111,7 +111,7 @@ public class Main {
 		List<String> Signal = new ArrayList<String>();
 		List<String> ID = new ArrayList<String>();
 		
-		Process TermRaw = getTerminalOut();
+		List<String> TermRaw = getTerminalOut();
 		
 		Address = getOutputRaw("Address", TermRaw);
 		Signal = getOutputRaw("Signal", TermRaw);
@@ -155,18 +155,19 @@ public class Main {
 		return new Node(nodes.size() + 1, Address, Signal, ID);
 	}
 	
-	public static Process getTerminalOut()
+	public static List<String> getTerminalOut()
 	{
 		
 		String s = null;
 		Process p = null;
 		int output = 0;
+		List<String> out = new ArrayList<String>();
 		
 		while(output <= 1)	{
 			output = 0;
 			try {
 				p = Runtime.getRuntime().exec("iwlist wlp2s0 scan");
-			
+				
 				try {
 					Thread.sleep(3000);                 //1000 milliseconds is one second.
 				} catch(InterruptedException ex) {
@@ -177,6 +178,8 @@ public class Main {
 			
 				while((s = stdInput.readLine()) != null) {
 				
+					out.add(s);
+					
 					if (s.contains("Cell")) {
 						System.out.println(s);
 						output++;
@@ -188,28 +191,22 @@ public class Main {
 				return null;
 			}
 		}
-		return p;
+		return out;
 		
 	}
 	
-	public static List<String> getOutputRaw(String command, Process p) {
+	public static List<String> getOutputRaw(String command, List<String> stdInput) {
 		
-		String s = null;
+		//String s = null;
 		List<String> output = new ArrayList<String>();
 
-		
-		BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-		try {
-		while((s = stdInput.readLine()) != null) {
+		for(int i = 0; i < stdInput.size(); i++) {
 				
-			if (s.contains(command)) {
-				System.out.println(s);
-				output.add(s);
+			if (stdInput.get(i).contains(command)) {
+				System.out.println(stdInput.get(i));
+				output.add(stdInput.get(i));
 			}
-		}
-		} catch(IOException e)	{
-			
 		}
 			
 		System.out.println("Output size is = " + output.size());
