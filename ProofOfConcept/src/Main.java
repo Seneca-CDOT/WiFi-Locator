@@ -154,9 +154,14 @@ public class Main {
 	}
 	
 	public static List<String> getOutputRaw(String command) {
+		
 		String s = null;
 		List<String> output = new ArrayList<String>();
 
+		while(output.size() <= 1)
+		{
+			output.clear();
+			
 		try {
 
 			// run the terminal command
@@ -175,13 +180,16 @@ public class Main {
 
 			// read the output from the command
 			// System.out.println("Here is the standard output of the command:\n");
-			while ((s = stdInput.readLine()) != null) {
+			while((s = stdInput.readLine()) != null) {
+				
 				if (s.contains(command)) {
 					System.out.println(s);
 					output.add(s);
 				}
 			}
-
+			
+			System.out.println("Output size is = " + output.size());
+			
 			// read any errors from the attempted command
 			// System.out.println("Here is the standard error of the command (if any):\n");
 			while ((s = stdError.readLine()) != null) {
@@ -192,6 +200,7 @@ public class Main {
 			System.out.println("Exception occurred.");
 			e.printStackTrace();
 			System.exit(-1);
+		}
 		}
 		return output;
 
