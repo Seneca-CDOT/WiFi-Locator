@@ -23,6 +23,8 @@ public class LocationCSV {
 
 			output.write(location.NodeNum);
 			output.write("\r\n");
+			output.write("Closest Node is " + String.valueOf(closestNode));
+			output.write("\r\n");
 			for (int i = 0; i < location.MacAddr.size(); i++) {
 				output.write(location.MacAddr.get(i));
 				output.write(",");
@@ -31,17 +33,7 @@ public class LocationCSV {
 				output.write(location.NodeStrength.get(i));
 				output.write("\r\n");
 			}
-			output.write("Calculations");
-			output.write("\r\n");
-			for (int j = 0; j < scores.size();j++) {
-				output.write(j);
-				output.write(",");
-				output.write(scores.get(j));
-				output.write("\r\n");
-			}
-
-			output.write("Closest Node is " + String.valueOf(closestNode));
-
+			
 			System.out.println("location data is in file");
 			output.close();
 		} catch (IOException e) {

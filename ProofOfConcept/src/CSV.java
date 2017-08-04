@@ -15,7 +15,7 @@ public class CSV {
 		try {
 			String dir = System.getProperty("user.dir");
 			File survey = new File(dir + "survey.csv");
-			FileWriter output = new FileWriter(survey, true);
+			FileWriter output = new FileWriter(survey);
 
 			for (int i = 0; i < list.size(); i++) {
 				output.write(list.get(i).NodeNum);
