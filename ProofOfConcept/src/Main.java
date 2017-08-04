@@ -88,6 +88,9 @@ public class Main {
 
 							counter++;
 						}
+						CurScore += 5;
+						
+						/*
 						List<String> UPosSeneca = new ArrayList<String>();
 						List<String> NodeSeneca = new ArrayList<String>();
 
@@ -117,6 +120,7 @@ public class Main {
 							}
 							CurScore += ((NodeSeneca.size() - UPosSeneca.size()) * 10);
 						}
+						*/
 
 					}
 
