@@ -13,7 +13,7 @@ public class ReadSerial {
 	private static final String FILENAME = "/dev/ttyUSB0";
 
 	public static List<String> read() {
-		System.out.println("read starting");
+		//System.out.println("read starting");
 		
 		BufferedReader br = null;
 		FileReader fr = null;
@@ -33,7 +33,7 @@ public class ReadSerial {
 			}
 
 		} catch (IOException e) {
-
+			System.out.println("Aror");
 			e.printStackTrace();
 
 		} finally {
@@ -62,9 +62,11 @@ public class ReadSerial {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    	
-        read();
-        
+    	System.out.println("Starting Read");
+    	while(true)
+    	{
+    		read();
+    	}
     }
 
    
