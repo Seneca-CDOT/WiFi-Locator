@@ -2,5 +2,11 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="commapi"/>
+	<classpathentry exported="true" kind="lib" path="RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="commapi/jar/comm.jar"/>
+	<classpathentry kind="lib" path="commapi/jar/tools/BlackBox.jar"/>
+	<classpathentry kind="lib" path="commapi/jar/tools/ParallelBlackBox.jar"/>
+	<classpathentry kind="lib" path="commapi/jar/commtest.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
