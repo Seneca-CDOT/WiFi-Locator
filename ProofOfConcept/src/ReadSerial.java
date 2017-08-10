@@ -13,18 +13,21 @@ public class ReadSerial {
 	private static final String FILENAME = "/dev/ttyUSB0";
 	public static ArrayList<ESPLocation> locations = new ArrayList<ESPLocation>();
 
-	public static List<String> read() {
+	public static Node read(int nodenum) {
 		// System.out.println("read starting");
 
 		BufferedReader br = null;
 		FileReader fr = null;
 		List<String> output = new ArrayList<String>();
-		
+
 		long timestamp;
 		String MACAddress;
-		List<String> ssid;
-		List<String> mac;
-		List<Integer> signal;
+		String[] ssid;
+		String[] mac;
+		int[] signal;
+		
+		
+	
 
 		try {
 
@@ -33,7 +36,7 @@ public class ReadSerial {
 			br = new BufferedReader(fr);
 
 			String sCurrentLine;
-			
+
 			output = new ArrayList<String>();
 
 			while ((sCurrentLine = br.readLine()) != null) {
@@ -62,10 +65,18 @@ public class ReadSerial {
 			}
 
 		}
-		
+
 		timestamp = Long.parseLong(output.get(0));
 		MACAddress = output.get(1);
+		ssid = output.get(2).split(",");
+		signal = Integer.valueOf(output.get(3)).split(",");
+		mac = output.get(3).split(",");
 		
+		if (nodenum == -1) {
+			nodenum = -1;
+		}
+		
+		Node node = new Node(timestamp, nodenum, mac)
 
 		return output;
 
