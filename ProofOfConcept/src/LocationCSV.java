@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.util.List;
 
 public class LocationCSV {
-	Node location;
+	ESPLocation location;
 	int closestNode;
 	List<Integer> scores;
 
-	public LocationCSV(Node UPos, int closestNode, List<Integer> scores) {
+	public LocationCSV(ESPLocation UPos, int closestNode, List<Integer> scores) {
 		location = UPos;
 		this.closestNode = closestNode;
 		this.scores = scores;
@@ -21,16 +21,16 @@ public class LocationCSV {
 			File survey = new File(dir + "locations.csv");
 			FileWriter output = new FileWriter(survey, true);
 
-			output.write(location.NodeNum);
-			output.write("\r\n");
 			output.write("Closest Node is " + String.valueOf(closestNode));
 			output.write("\r\n");
-			for (int i = 0; i < location.MacAddr.size(); i++) {
-				output.write(location.MacAddr.get(i));
+			output.write("Timestamp: " + String.valueOf(location.timestamp));
+			output.write("MAC of ESP is " + location.MACAddress);
+			for (int i = 0; i < location.mac.size(); i++) {
+				output.write(location.mac.get(i));
 				output.write(",");
-				output.write(location.SSID.get(i));
+				output.write(location.ssid.get(i));
 				output.write(",");
-				output.write(location.NodeStrength.get(i));
+				output.write(location.signal.get(i));
 				output.write("\r\n");
 			}
 			
