@@ -43,8 +43,7 @@ public class Main {
 		saveNode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("saveNode button pressed");
-				
-				nodes.add(ReadSerial.read(nodes.size()+1));
+				nodes.add(ReadSerial.read(nodes.size() + 1));
 			}
 		});
 
@@ -87,38 +86,24 @@ public class Main {
 							counter++;
 						}
 						CurScore += 5;
-						
+
 						/*
-						List<String> UPosSeneca = new ArrayList<String>();
-						List<String> NodeSeneca = new ArrayList<String>();
-
-						for (int q = 0; q < nodes.get(i).SSID.size(); q++) {
-							if (nodes.get(i).SSID.get(q).equals("SenecaNET")) {
-								NodeSeneca.add(nodes.get(i).MacAddr.get(q));
-							}
-						}
-						for (int q = 0; q < UPos.SSID.size(); q++) {
-							if (UPos.SSID.get(q).equals("SenecaNET")) {
-								UPosSeneca.add(UPos.MacAddr.get(q));
-							}
-						}
-
-						if (UPosSeneca.size() > NodeSeneca.size()) {
-							for (int q = 0; q < NodeSeneca.size(); q++) {
-								if (!UPosSeneca.contains(NodeSeneca.get(q))) {
-									CurScore += 10;
-								}
-							}
-							CurScore += ((UPosSeneca.size() - NodeSeneca.size()) * 10);
-						} else {
-							for (int q = 0; q < UPosSeneca.size(); q++) {
-								if (!NodeSeneca.contains(UPosSeneca.get(q))) {
-									CurScore += 10;
-								}
-							}
-							CurScore += ((NodeSeneca.size() - UPosSeneca.size()) * 10);
-						}
-						*/
+						 * List<String> UPosSeneca = new ArrayList<String>(); List<String> NodeSeneca =
+						 * new ArrayList<String>();
+						 * 
+						 * for (int q = 0; q < nodes.get(i).SSID.size(); q++) { if
+						 * (nodes.get(i).SSID.get(q).equals("SenecaNET")) {
+						 * NodeSeneca.add(nodes.get(i).MacAddr.get(q)); } } for (int q = 0; q <
+						 * UPos.SSID.size(); q++) { if (UPos.SSID.get(q).equals("SenecaNET")) {
+						 * UPosSeneca.add(UPos.MacAddr.get(q)); } }
+						 * 
+						 * if (UPosSeneca.size() > NodeSeneca.size()) { for (int q = 0; q <
+						 * NodeSeneca.size(); q++) { if (!UPosSeneca.contains(NodeSeneca.get(q))) {
+						 * CurScore += 10; } } CurScore += ((UPosSeneca.size() - NodeSeneca.size()) *
+						 * 10); } else { for (int q = 0; q < UPosSeneca.size(); q++) { if
+						 * (!NodeSeneca.contains(UPosSeneca.get(q))) { CurScore += 10; } } CurScore +=
+						 * ((NodeSeneca.size() - UPosSeneca.size()) * 10); }
+						 */
 
 					}
 
@@ -134,118 +119,12 @@ public class Main {
 					}
 				}
 				System.out.println("Closest Node Is " + closestNode);
-				
+
 				LocationCSV locationCSV = new LocationCSV(UPos, closestNode, scores);
 				locationCSV.writeFile();
 
 			}
 		});
-
-	}
-
-	public static Node GetOutput() {
-		List<String> Address = new ArrayList<String>();
-		List<String> Signal = new ArrayList<String>();
-		List<String> ID = new ArrayList<String>();
-
-		List<String> TermRaw = getTerminalOut();
-
-		Address = getOutputRaw("Address", TermRaw);
-		Signal = getOutputRaw("Signal", TermRaw);
-		ID = getOutputRaw("ESSID", TermRaw);
-
-		for (int i = 0; i < Address.size(); i++) {
-			StringBuilder sbaddress = new StringBuilder(Address.get(i)); // getting access point
-
-			sbaddress.delete(0, 29);
-			String address = sbaddress.toString();
-			Address.set(i, address);
-
-			System.out.println(address);
-		}
-
-		for (int i = 0; i < Signal.size(); i++) {
-			StringBuilder sbsignal = new StringBuilder(Signal.get(i)); // getting signal strength
-
-			sbsignal.delete(0, 49);
-			sbsignal.delete(3, 7);
-			String signal = sbsignal.toString();
-			signal = signal.trim();
-			Signal.set(i, signal);
-
-			System.out.println(signal);
-		}
-
-		for (int i = 0; i < ID.size(); i++) {
-			StringBuilder sbID = new StringBuilder(ID.get(i));
-
-			sbID.delete(0, 27);
-			sbID.delete(sbID.length() - 1, sbID.length());
-			System.out.println(sbID);
-			String ssid = sbID.toString();
-			ID.set(i, ssid);
-
-		}
-
-		return new Node(nodes.size() + 1, Address, Signal, ID);
-	}
-
-	public static List<String> getTerminalOut() {
-
-		String s = null;
-		Process p = null;
-		int output = 0;
-		List<String> out = new ArrayList<String>();
-
-		while (output <= 1) {
-			output = 0;
-			out.clear();
-			
-			try {
-				p = Runtime.getRuntime().exec("iwlist wlp2s0 scan");
-
-				try {
-					Thread.sleep(3000); // 1000 milliseconds is one second.
-				} catch (InterruptedException ex) {
-					Thread.currentThread().interrupt();
-				}
-
-				BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-				while ((s = stdInput.readLine()) != null) {
-
-					out.add(s);
-
-					if (s.contains("Cell")) {
-						System.out.println(s);
-						output++;
-					}
-				}
-
-			} catch (IOException e) {
-				return null;
-			}
-		}
-		return out;
-
-	}
-
-	public static List<String> getOutputRaw(String command, List<String> stdInput) {
-
-		// String s = null;
-		List<String> output = new ArrayList<String>();
-
-		for (int i = 0; i < stdInput.size(); i++) {
-
-			if (stdInput.get(i).contains(command)) {
-				System.out.println(stdInput.get(i));
-				output.add(stdInput.get(i));
-			}
-		}
-
-		System.out.println("Output size is = " + output.size());
-
-		return output;
 
 	}
 

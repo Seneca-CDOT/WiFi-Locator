@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.io.PrintWriter;
 
 public class CSV {
 	List<Node> list;
@@ -15,28 +16,28 @@ public class CSV {
 		try {
 			String dir = System.getProperty("user.dir");
 			File survey = new File(dir + "survey.csv");
-			FileWriter output = new FileWriter(survey);
+			PrintWriter output = new PrintWriter(survey);
 
 			for (int i = 0; i < list.size(); i++) {
-				output.write(list.get(i).NodeNum);
+				output.write(String.valueOf(list.get(i).NodeNum));
 				output.write("\r\n");
-				for (int j = 0;j<list.get(i).MacAddr.size();j++) {
-					output.write(list.get(i).MacAddr.get(j).toString());
+				for (int j = 0; j < list.get(i).MacAddr.size(); j++) {
+					output.write(String.valueOf(list.get(i).MacAddr.get(j)));
 					output.write(",");
-					output.write(list.get(i).SSID.get(j).toString());
+					output.write(String.valueOf(list.get(i).SSID.get(j)));
 					output.write(",");
-					output.write(list.get(i).NodeStrength.get(j).toString());
+					output.write(String.valueOf(list.get(i).NodeStrength.get(j)));
 					output.write("\r\n");
 				}
 				output.write("\r\n");
 			}
-			
+
 			System.out.println("data is in file");
 			output.close();
-		}catch(IOException e) {
-			
+		} catch (IOException e) {
+
 		}
-		
+
 	}
 
 }

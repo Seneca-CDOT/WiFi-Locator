@@ -138,7 +138,7 @@ public class ReadSerial {
 
 			while (br.ready()) {
 				try {
-					Thread.sleep(2000);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					Thread.currentThread().interrupt();
 				}
@@ -149,6 +149,9 @@ public class ReadSerial {
 
 			}
 			if (output.size() > 1) {
+				while (output.get(0).length()<2) {
+					output.remove(0);
+				}
 				timestamp = Long.parseLong(output.get(0));
 				MACAddress = output.get(1);
 				ssid = output.get(2).split(",");
@@ -168,6 +171,7 @@ public class ReadSerial {
 					ssids.add(mac[i]);
 				}
 				node = new Node(Num, macs, signals, ssids);
+				System.out.println(Num + "number");
 			}
 
 		} catch (IOException e) {
