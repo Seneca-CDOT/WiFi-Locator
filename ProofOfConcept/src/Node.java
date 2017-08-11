@@ -7,9 +7,8 @@ public class Node {
 	List<String> NodeStrength;
 	List<String> SSID;
 	
-	public Node(int Time, int Nodenum, List<String> Mac, List<String> Strength, List<String> ID)
+	public Node(int Nodenum, List<String> Mac, List<String> Strength, List<String> ID)
 	{
-		timeStamp = Time;
 		NodeNum = Nodenum;
 		MacAddr = Mac;
 		NodeStrength = Strength;

@@ -5,9 +5,9 @@ public class ESPLocation {
 	String MACAddress;
 	List<String> ssid;
 	List<String> mac;
-	List<Integer> signal;
+	List<String> signal;
 
-	public ESPLocation(long time, String MACAddress, List<String> ssid, List<String> mac, List<Integer> signal) {
+	public ESPLocation(long time, String MACAddress, List<String> ssid, List<String> mac, List<String> signal) {
 		timestamp = time;
 		this.MACAddress = MACAddress;
 		this.ssid = ssid;

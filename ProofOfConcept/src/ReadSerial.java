@@ -13,7 +13,7 @@ public class ReadSerial {
 	private static final String FILENAME = "/dev/ttyUSB0";
 	public static ArrayList<ESPLocation> locations = new ArrayList<ESPLocation>();
 
-	public static Node read(int nodenum) {
+	public static ESPLocation read() {
 		// System.out.println("read starting");
 
 		BufferedReader br = null;
@@ -24,11 +24,8 @@ public class ReadSerial {
 		String MACAddress;
 		String[] ssid;
 		String[] mac;
-		int[] signal;
+		String[] signal;
 		
-		
-	
-
 		try {
 
 			// br = new BufferedReader(new FileReader(FILENAME));
@@ -65,20 +62,29 @@ public class ReadSerial {
 			}
 
 		}
-
 		timestamp = Long.parseLong(output.get(0));
 		MACAddress = output.get(1);
 		ssid = output.get(2).split(",");
-		signal = Integer.valueOf(output.get(3)).split(",");
+		signal = output.get(3).split(",");
 		mac = output.get(3).split(",");
 		
-		if (nodenum == -1) {
-			nodenum = -1;
+		List<String> ssids = new ArrayList<String>();
+		for (int i = 0;i<ssid.length;i++) {
+			ssids.add(ssid[i]);
+		}
+		List<String> signals = new ArrayList<String>();
+		for (int i = 0;i<signal.length;i++) {
+			signals.add(signal[i]);
+		}
+		List<String> macs = new ArrayList<String>();
+		for (int i = 0;i<mac.length;i++) {
+			ssids.add(mac[i]);
 		}
 		
-		Node node = new Node(timestamp, nodenum, mac)
+		ESPLocation esp = new ESPLocation(timestamp, MACAddress, ssids, macs, signals);
+		locations.add(esp);
 
-		return output;
+		return esp;
 
 	}
 
