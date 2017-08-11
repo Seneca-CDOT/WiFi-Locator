@@ -40,6 +40,7 @@ public class ReadSerial {
 			while ((sCurrentLine = br.readLine()) != null) {
 				output.add(sCurrentLine);
 				System.out.println(sCurrentLine);
+				System.out.println(br.readLine());
 
 			}
 			if (output.size() > 1) {
