@@ -27,8 +27,7 @@ public class ReadSerial {
 		String[] mac;
 		String[] signal;
 
-		while(esp == null)
-		{
+		while (esp == null) {
 			try {
 
 				// br = new BufferedReader(new FileReader(FILENAME));
@@ -112,8 +111,7 @@ public class ReadSerial {
 		String[] mac;
 		String[] signal;
 
-		while(node == null)
-		{
+		while (node == null) {
 			try {
 
 				fr = new FileReader(FILENAME);
@@ -134,7 +132,7 @@ public class ReadSerial {
 
 				}
 				if (output.size() > 1) {
-					while (output.get(0).length()<2) {
+					while (output.get(0).length() < 2) {
 						output.remove(0);
 					}
 

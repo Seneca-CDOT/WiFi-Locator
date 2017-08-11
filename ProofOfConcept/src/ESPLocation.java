@@ -1,6 +1,5 @@
 import java.util.List;
 
-
 /**
  * @author ethchil
  * @author sammydamdam
@@ -19,6 +18,5 @@ public class ESPLocation {
 		this.MacAddrs = mac;
 		this.Signal = signal;
 	}
-
 
 }
