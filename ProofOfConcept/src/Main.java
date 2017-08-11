@@ -43,7 +43,11 @@ public class Main {
 		saveNode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("saveNode button pressed");
-				nodes.add(ReadSerial.read(nodes.size() + 1));
+				Node tempnode = ReadSerial.read(nodes.size() + 1);
+				while (tempnode == null) {
+					tempnode = ReadSerial.read(nodes.size() + 1);
+				}
+				nodes.add(tempnode);
 			}
 		});
 
@@ -59,8 +63,12 @@ public class Main {
 		findLocation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("findLocation button pressed");
-
+				
 				ESPLocation UPos = ReadSerial.read();
+				
+				while (UPos == null) {
+					UPos = ReadSerial.read();
+				}
 
 				int closestNode = 0;
 				int score = 100000;

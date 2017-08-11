@@ -34,7 +34,7 @@ public class ReadSerial {
 			br = new BufferedReader(fr);
 
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(1200);
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
 			}
@@ -45,7 +45,7 @@ public class ReadSerial {
 
 			while (br.ready()) {
 				try {
-					Thread.sleep(2000);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					Thread.currentThread().interrupt();
 				}
@@ -60,7 +60,7 @@ public class ReadSerial {
 				MACAddress = output.get(1);
 				ssid = output.get(2).split(",");
 				signal = output.get(3).split(",");
-				mac = output.get(3).split(",");
+				mac = output.get(4).split(",");
 
 				List<String> ssids = new ArrayList<String>();
 				for (int i = 0; i < ssid.length; i++) {
@@ -72,7 +72,7 @@ public class ReadSerial {
 				}
 				List<String> macs = new ArrayList<String>();
 				for (int i = 0; i < mac.length; i++) {
-					ssids.add(mac[i]);
+					macs.add(mac[i]);
 				}
 				esp = new ESPLocation(timestamp, MACAddress, ssids, macs, signals);
 
@@ -114,8 +114,6 @@ public class ReadSerial {
 		List<String> output = new ArrayList<String>();
 		Node node = null;
 
-		long timestamp;
-		String MACAddress;
 		String[] ssid;
 		String[] mac;
 		String[] signal;
@@ -127,7 +125,7 @@ public class ReadSerial {
 			br = new BufferedReader(fr);
 
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(1200);
 			} catch (InterruptedException e) {
 				Thread.currentThread().interrupt();
 			}
@@ -152,11 +150,10 @@ public class ReadSerial {
 				while (output.get(0).length()<2) {
 					output.remove(0);
 				}
-				timestamp = Long.parseLong(output.get(0));
-				MACAddress = output.get(1);
+
 				ssid = output.get(2).split(",");
 				signal = output.get(3).split(",");
-				mac = output.get(3).split(",");
+				mac = output.get(4).split(",");
 
 				List<String> ssids = new ArrayList<String>();
 				for (int i = 0; i < ssid.length; i++) {
@@ -168,10 +165,10 @@ public class ReadSerial {
 				}
 				List<String> macs = new ArrayList<String>();
 				for (int i = 0; i < mac.length; i++) {
-					ssids.add(mac[i]);
+					macs.add(mac[i]);
+				
 				}
 				node = new Node(Num, macs, signals, ssids);
-				System.out.println(Num + "number");
 			}
 
 		} catch (IOException e) {
