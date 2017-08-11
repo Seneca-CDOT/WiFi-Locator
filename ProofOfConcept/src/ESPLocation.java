@@ -7,17 +7,17 @@ import java.util.List;
  */
 public class ESPLocation {
 	long timestamp;
-	String MACAddress;
-	List<String> ssid;
-	List<String> mac;
-	List<String> signal;
+	String mac;
+	List<String> SSID;
+	List<String> MacAddrs;
+	List<String> Signal;
 
 	public ESPLocation(long time, String MACAddress, List<String> ssid, List<String> mac, List<String> signal) {
 		timestamp = time;
-		this.MACAddress = MACAddress;
-		this.ssid = ssid;
-		this.mac = mac;
-		this.signal = signal;
+		this.mac = MACAddress;
+		this.SSID = ssid;
+		this.MacAddrs = mac;
+		this.Signal = signal;
 	}
 
 

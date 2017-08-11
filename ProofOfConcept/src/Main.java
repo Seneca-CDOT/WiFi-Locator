@@ -90,23 +90,30 @@ public class Main {
 				int score = 100000;
 				int CurScore = 0;
 				int counter = 1;
+				Node CurNode;
+				
 				List<Integer> scores = new ArrayList<>();
 				
 				//Fuzzy logic comparison
 				System.out.println("Calculating Fuzzy Logic");
 				for (int i = 0; i < nodes.size(); i++) {
-					for (int j = 0; j < UPos.mac.size(); j++) {
-						if (nodes.get(i).MacAddr.contains(UPos.mac.get(j))) {
+					for (int j = 0; j < UPos.MacAddrs.size(); j++) {
+						CurNode = nodes.get(i);
+						
+						if (CurNode.MacAddrs.contains(UPos.MacAddrs.get(j))) {
+							
+							
 							System.out.println("Calc " + j + " = "
 									+ Math.abs((Integer
-											.parseInt(nodes.get(i).NodeStrength
-													.get(nodes.get(i).MacAddr.indexOf(UPos.mac.get(j))))
-											- Integer.parseInt(UPos.signal.get(j))))
-									+ " ESSID of " + UPos.ssid.get(j));
-
+											.parseInt(CurNode.NodeSignal
+													.get(CurNode.MacAddrs.indexOf(UPos.MacAddrs.get(j))))
+											- Integer.parseInt(UPos.Signal.get(j))))
+									+ " ESSID of " + UPos.SSID.get(j));
+							
+							
 							CurScore += Math.abs(Integer.parseInt(
-									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(UPos.mac.get(j))))
-									- Integer.parseInt(UPos.signal.get(j)));
+									CurNode.NodeSignal.get(CurNode.MacAddrs.indexOf(UPos.MacAddrs.get(j))))
+									- Integer.parseInt(UPos.Signal.get(j)));
 
 							counter++;
 						}
