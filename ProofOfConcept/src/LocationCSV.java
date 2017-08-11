@@ -28,14 +28,14 @@ public class LocationCSV {
 			output.write("\r\n");
 			output.write("Timestamp: " + String.valueOf(location.timestamp));
 			output.write("\r\n");
-			output.write("MAC of ESP is " + location.MACAddress);
+			output.write("MAC of ESP is " + location.mac);
 			output.write("\r\n");
-			for (int i = 0; i < location.mac.size(); i++) {
-				output.write(location.mac.get(i));
+			for (int i = 0; i < location.MacAddrs.size(); i++) {
+				output.write(location.MacAddrs.get(i));
 				output.write(",");
-				output.write(location.ssid.get(i));
+				output.write(location.SSID.get(i));
 				output.write(",");
-				output.write(location.signal.get(i));
+				output.write(location.Signal.get(i));
 				output.write("\r\n");
 			}
 			
