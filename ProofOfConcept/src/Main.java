@@ -6,76 +6,98 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.IOException;
 
 public class Main {
 
 	static List<Node> nodes = new ArrayList<Node>();
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
+		//Make Window
 		JFrame window = new JFrame("Create Nodes");
+		
+		//Make 3 buttons
 		JButton saveNode = new JButton();
-		JPanel pane = new JPanel();
 		JButton findLocation = new JButton();
 		JButton createCSV = new JButton();
+		
+		//JPane to hold the buttons on the window
+		JPanel pane = new JPanel();
 
-		saveNode.setText("Create New Node");
+		//Setup window
 		window.setSize(500, 500);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
-		window.add(pane);
+		
+		
+		//setup buttons
+		saveNode.setText("Create New Node");
 		saveNode.setPreferredSize(new Dimension(200, 40));
-		pane.add(saveNode);
+		
 		findLocation.setText("Find Location");
 		findLocation.setPreferredSize(new Dimension(200, 40));
-		pane.add(findLocation);
+		
 		createCSV.setText("Create CSV");
 		createCSV.setPreferredSize(new Dimension(200, 40));
+		
+		
+		//add buttons to pane
 		pane.add(createCSV);
+		pane.add(saveNode);
+		pane.add(findLocation);
+		
+		//add pane to window
+		window.add(pane);
 
-		// HashMap<List<String>, List<String>> nodes = new HashMap<List<String>,
-		// List<String>>();
-
+		//Create New Node action listener
 		saveNode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("saveNode button pressed");
+				
+				//Ensures that the node had data
 				Node tempnode = ReadSerial.read(nodes.size() + 1);
+				
 				while (tempnode == null) {
 					tempnode = ReadSerial.read(nodes.size() + 1);
 				}
 				nodes.add(tempnode);
 			}
 		});
-
+		
+		//CSV dump actionlistener
 		createCSV.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("CSV Button pressed");
+				
+				//Only writes Nodes
 				CSV csv = new CSV(nodes);
 				csv.writeFile();
-
 			}
 		});
 
+		//Find nearest node actionlistener
 		findLocation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("findLocation button pressed");
 				
+				//Gets a "Node" of the current location
 				ESPLocation UPos = ReadSerial.read();
 				
+				//ensures that this is a node
 				while (UPos == null) {
 					UPos = ReadSerial.read();
 				}
 
+				//Vars needed
 				int closestNode = 0;
 				int score = 100000;
 				int CurScore = 0;
 				int counter = 1;
 				List<Integer> scores = new ArrayList<>();
-
+				
+				//Fuzzy logic comparison
 				System.out.println("Calculating Fuzzy Logic");
 				for (int i = 0; i < nodes.size(); i++) {
 					for (int j = 0; j < UPos.mac.size(); j++) {
