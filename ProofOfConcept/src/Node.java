@@ -1,7 +1,9 @@
 import java.util.List;
 
+/**
+ * @author ethchil
+ */
 public class Node {
-	int timeStamp;
 	int NodeNum;
 	List<String> MacAddr;
 	List<String> NodeStrength;

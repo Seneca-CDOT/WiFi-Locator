@@ -9,6 +9,11 @@ import javax.swing.JPanel;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * @author ethchil
+ * @author sammmydamdam
+ */
 public class Main {
 
 	static List<Node> nodes = new ArrayList<Node>();
@@ -55,14 +60,9 @@ public class Main {
 		saveNode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("saveNode button pressed");
-				
-				//Ensures that the node had data
-				Node tempnode = ReadSerial.read(nodes.size() + 1);
-				
-				while (tempnode == null) {
-					tempnode = ReadSerial.read(nodes.size() + 1);
-				}
-				nodes.add(tempnode);
+
+				//Gets node and places it in ReadSerial
+				nodes.add(ReadSerial.read(nodes.size() + 1));
 			}
 		});
 		
@@ -84,11 +84,6 @@ public class Main {
 				
 				//Gets a "Node" of the current location
 				ESPLocation UPos = ReadSerial.read();
-				
-				//ensures that this is a node
-				while (UPos == null) {
-					UPos = ReadSerial.read();
-				}
 
 				//Vars needed
 				int closestNode = 0;

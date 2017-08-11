@@ -1,5 +1,10 @@
 import java.util.List;
 
+
+/**
+ * @author ethchil
+ * @author sammydamdam
+ */
 public class ESPLocation {
 	long timestamp;
 	String MACAddress;

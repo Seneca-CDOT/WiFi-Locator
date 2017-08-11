@@ -3,6 +3,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author sammydamdam
+ */
 public class LocationCSV {
 	ESPLocation location;
 	int closestNode;
