@@ -24,7 +24,9 @@ public class LocationCSV {
 			output.write("Closest Node is " + String.valueOf(closestNode));
 			output.write("\r\n");
 			output.write("Timestamp: " + String.valueOf(location.timestamp));
+			output.write("\r\n");
 			output.write("MAC of ESP is " + location.MACAddress);
+			output.write("\r\n");
 			for (int i = 0; i < location.mac.size(); i++) {
 				output.write(location.mac.get(i));
 				output.write(",");
