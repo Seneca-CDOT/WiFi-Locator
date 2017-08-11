@@ -21,7 +21,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		//Make Window
-		JFrame window = new JFrame("Create Nodes");
+		JFrame window = new JFrame("Peapod");
 		
 		//Make 3 buttons
 		JButton saveNode = new JButton();
@@ -32,7 +32,7 @@ public class Main {
 		JPanel pane = new JPanel();
 
 		//Setup window
-		window.setSize(500, 500);
+		window.setSize(275, 200);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 		
@@ -49,9 +49,9 @@ public class Main {
 		
 		
 		//add buttons to pane
-		pane.add(createCSV);
 		pane.add(saveNode);
 		pane.add(findLocation);
+		pane.add(createCSV);
 		
 		//add pane to window
 		window.add(pane);
