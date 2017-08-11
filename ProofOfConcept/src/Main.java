@@ -43,8 +43,8 @@ public class Main {
 		saveNode.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("saveNode button pressed");
-
-				nodes.add(GetOutput());
+				
+				nodes.add(ReadSerial.read(nodes.size()+1));
 			}
 		});
 
@@ -61,7 +61,7 @@ public class Main {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("findLocation button pressed");
 
-				Node UPos = GetOutput();
+				ESPLocation UPos = ReadSerial.read();
 
 				int closestNode = 0;
 				int score = 100000;
@@ -71,18 +71,18 @@ public class Main {
 
 				System.out.println("Calculating Fuzzy Logic");
 				for (int i = 0; i < nodes.size(); i++) {
-					for (int j = 0; j < UPos.MacAddr.size(); j++) {
-						if (nodes.get(i).MacAddr.contains(UPos.MacAddr.get(j))) {
+					for (int j = 0; j < UPos.mac.size(); j++) {
+						if (nodes.get(i).MacAddr.contains(UPos.mac.get(j))) {
 							System.out.println("Calc " + j + " = "
 									+ Math.abs((Integer
 											.parseInt(nodes.get(i).NodeStrength
-													.get(nodes.get(i).MacAddr.indexOf(UPos.MacAddr.get(j))))
-											- Integer.parseInt(UPos.NodeStrength.get(j))))
-									+ " ESSID of " + UPos.SSID.get(j));
+													.get(nodes.get(i).MacAddr.indexOf(UPos.mac.get(j))))
+											- Integer.parseInt(UPos.signal.get(j))))
+									+ " ESSID of " + UPos.ssid.get(j));
 
 							CurScore += Math.abs(Integer.parseInt(
-									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(UPos.MacAddr.get(j))))
-									- Integer.parseInt(UPos.NodeStrength.get(j)));
+									nodes.get(i).NodeStrength.get(nodes.get(i).MacAddr.indexOf(UPos.mac.get(j))))
+									- Integer.parseInt(UPos.signal.get(j)));
 
 							counter++;
 						}
