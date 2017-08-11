@@ -33,14 +33,26 @@ public class ReadSerial {
 			fr = new FileReader(FILENAME);
 			br = new BufferedReader(fr);
 
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+			}
+
 			String sCurrentLine;
 
 			output = new ArrayList<String>();
 
-			while ((sCurrentLine = br.readLine()) != null) {
+			while (br.ready()) {
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
+
+				sCurrentLine = br.readLine();
 				output.add(sCurrentLine);
 				System.out.println(sCurrentLine);
-				System.out.println(br.readLine());
 
 			}
 			if (output.size() > 1) {
@@ -100,6 +112,7 @@ public class ReadSerial {
 		BufferedReader br = null;
 		FileReader fr = null;
 		List<String> output = new ArrayList<String>();
+		Node node = null;
 
 		long timestamp;
 		String MACAddress;
@@ -113,13 +126,48 @@ public class ReadSerial {
 			fr = new FileReader(FILENAME);
 			br = new BufferedReader(fr);
 
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+			}
+
 			String sCurrentLine;
 
 			output = new ArrayList<String>();
 
-			while ((sCurrentLine = br.readLine()) != null) {
-				output.add(sCurrentLine);
+			while (br.ready()) {
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
 
+				sCurrentLine = br.readLine();
+				output.add(sCurrentLine);
+				System.out.println(sCurrentLine);
+
+			}
+			if (output.size() > 1) {
+				timestamp = Long.parseLong(output.get(0));
+				MACAddress = output.get(1);
+				ssid = output.get(2).split(",");
+				signal = output.get(3).split(",");
+				mac = output.get(3).split(",");
+
+				List<String> ssids = new ArrayList<String>();
+				for (int i = 0; i < ssid.length; i++) {
+					ssids.add(ssid[i]);
+				}
+				List<String> signals = new ArrayList<String>();
+				for (int i = 0; i < signal.length; i++) {
+					signals.add(signal[i]);
+				}
+				List<String> macs = new ArrayList<String>();
+				for (int i = 0; i < mac.length; i++) {
+					ssids.add(mac[i]);
+				}
+				node = new Node(Num, macs, signals, ssids);
 			}
 
 		} catch (IOException e) {
@@ -143,40 +191,9 @@ public class ReadSerial {
 			}
 
 		}
-		timestamp = Long.parseLong(output.get(0));
-		MACAddress = output.get(1);
-		ssid = output.get(2).split(",");
-		signal = output.get(3).split(",");
-		mac = output.get(3).split(",");
-
-		List<String> ssids = new ArrayList<String>();
-		for (int i = 0; i < ssid.length; i++) {
-			ssids.add(ssid[i]);
-		}
-		List<String> signals = new ArrayList<String>();
-		for (int i = 0; i < signal.length; i++) {
-			signals.add(signal[i]);
-		}
-		List<String> macs = new ArrayList<String>();
-		for (int i = 0; i < mac.length; i++) {
-			ssids.add(mac[i]);
-		}
-
-		Node node = new Node(Num, macs, signals, ssids);
 
 		return node;
 
-	}
-
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
-	public static void main(String[] args) {
-		System.out.println("Starting Read");
-		while (true) {
-			read();
-		}
 	}
 
 }
