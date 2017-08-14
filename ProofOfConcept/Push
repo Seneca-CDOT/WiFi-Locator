@@ -10,7 +10,7 @@ if [ "$UsrInput" = "y" ]
 then
 	echo enter in file name
 	read FileName
-	cd src
+	cd find -name $FileName -printf '%h\n' | sort -u
 	git add $FileName
 else
 	git add .
