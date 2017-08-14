@@ -23,7 +23,6 @@ public class CSV {
 			for (int i = 0; i < list.size(); i++) {
 				output.write(String.valueOf(list.get(i).NodeNum));
 				output.write("\r\n");
-				System.out.println(list.get(i).MacAddrs.size());
 				for (int j = 0; j < list.get(i).MacAddrs.size(); j++) {
 					output.write(String.valueOf(list.get(i).MacAddrs.get(j)));
 					output.write(",");
