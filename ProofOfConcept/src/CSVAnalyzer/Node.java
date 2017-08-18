@@ -18,9 +18,9 @@ public class Node {
 		SSID = ID;
 	}
 	public String toString() {
-		System.out.println(Nodenum);
+		System.out.println(NodeNum);
 		for (int i = 0;i<SSID.size();i++) {
-			System.out.println(SSID.get(i) + MacAddrs.get(i) + Signal.get(i));
+			System.out.println(SSID.get(i) + " " + MacAddrs.get(i) + " " + NodeSignal.get(i));
 		}
 		return "";
 		

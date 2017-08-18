@@ -24,7 +24,7 @@ public class ESPLocation {
 		System.out.println("Timestamp: " + timestamp);
 		System.out.println(mac);
 		for (int i = 0;i<SSID.size();i++) {
-			System.out.println(SSID.get(i) + MacAddrs.get(i) + Signal.get(i));
+			System.out.println(SSID.get(i) + " " + MacAddrs.get(i) + " " + Signal.get(i));
 		}
 		return "";
 		
