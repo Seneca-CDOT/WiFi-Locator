@@ -17,5 +17,14 @@ public class Node {
 		NodeSignal = Strength;
 		SSID = ID;
 	}
+	public String toString() {
+		System.out.println(Nodenum);
+		for (int i = 0;i<SSID.size();i++) {
+			System.out.println(SSID.get(i) + MacAddrs.get(i) + Signal.get(i));
+		}
+		return "";
+		
+	
+	}
 
 }

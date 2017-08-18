@@ -38,6 +38,7 @@ public class LocationCSV {
 				output.write(location.Signal.get(i));
 				output.write("\r\n");
 			}
+			output.write("\r\n");
 
 			System.out.println("location data is in file");
 			output.close();
