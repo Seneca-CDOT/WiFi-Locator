@@ -11,7 +11,7 @@ import java.util.List;
 
 public class FuzzyLogic {
 
-	public static List<Integer> CalcFuzzyLogic(List<Node> LocNode, List<Node> CurNode)
+	public static List<Integer> CalcFuzzyLogic(List<Node> LocNode, List<ESPLocation> CurNode)
 	{
 		int LocNodeStrength = 0;
 		int CurNodeStrength = 0;
@@ -30,7 +30,7 @@ public class FuzzyLogic {
 					if(LocNode.get(j).MacAddrs.contains(CurNode.get(k).MacAddrs.get(i)))
 					{
 						LocNodeStrength = Integer.parseInt(LocNode.get(j).NodeSignal.get(LocNode.get(j).MacAddrs.indexOf(CurNode.get(k).MacAddrs.get(i))));
-						CurNodeStrength = Integer.parseInt(CurNode.get(k).NodeSignal.get(i));
+						CurNodeStrength = Integer.parseInt(CurNode.get(k).Signal.get(i));
 
 						CurScore += Math.abs(LocNodeStrength - CurNodeStrength);
 					}
