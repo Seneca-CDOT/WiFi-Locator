@@ -10,20 +10,21 @@ import java.util.List;
 public class Main {
 
 	public static void main(String[] args) {
-		String csvFileSurvey = "/run/media/yaosa/YAOSA/ProofOfConceptsurvey.csv"; // replace "" with file name + directory
-		String csvFileNode = "";
-		
-		BufferedReader br = null;
-		BufferedReader br2 = null;
-		String line = "";
-		
-		List<Node> Locations = new ArrayList<Node>();
-		List<Node> SamplePoints = new ArrayList<Node>();
+
+	}
+	
+	public static List<Node> readSurvey(){
+		String csvFileSurvey = "/run/media/yaosa/YAOSA/ProofOfConceptsurvey.csv";
 		
 		List<String> macs = new ArrayList<String>();
 		List<String> SSIDs = new ArrayList<String>();
 		List<String> Signal = new ArrayList<String>();
-
+		
+		List<Node> survey = new ArrayList<Node>();
+		
+		BufferedReader br = null;
+		String line = "";
+		
 		try {
 
 			br = new BufferedReader(new FileReader(csvFileSurvey));
@@ -40,7 +41,7 @@ public class Main {
 				}
 				else
 				{
-					Locations.add(new Node(Locations.size(), macs, Signal, SSIDs));
+					survey.add(new Node(survey.size(), macs, Signal, SSIDs));
 					macs.clear();
 					SSIDs.clear();
 					Signal.clear();
@@ -62,11 +63,27 @@ public class Main {
 				}
 			}
 		}
+		return survey;
+		
+	}
+	
+	public static List<ESPLocation> readLocations(){
+		String csvFileLocations = "/run/media/yaosa/YAOSA/ProofOfConceptlocations.csv";
+		
+		List<String> macs = new ArrayList<String>();
+		List<String> SSIDs = new ArrayList<String>();
+		List<String> Signal = new ArrayList<String>();
+		
+		List<ESPLocation> locations = new ArrayList<ESPLocation>();
+		
+		BufferedReader br = null;
+		String line = "";
+		
 		
 		try {
 
-			br2 = new BufferedReader(new FileReader(csvFileNode));
-			while ((line = br2.readLine()) != null) {
+			br = new BufferedReader(new FileReader(csvFileLocations));
+			while ((line = br.readLine()) != null) {
 				// use comma as separator
 				if(line.length() > 2)
 				{
@@ -79,7 +96,7 @@ public class Main {
 				}
 				else
 				{
-					Locations.add(new Node(Locations.size(), macs, Signal, SSIDs));
+					locations.add(new ESPLocation(locations.size(), macs, Signal, SSIDs));
 					macs.clear();
 					SSIDs.clear();
 					Signal.clear();
@@ -101,7 +118,8 @@ public class Main {
 				}
 			}
 		}
-
+		return locations;
+		
 	}
 
 }
