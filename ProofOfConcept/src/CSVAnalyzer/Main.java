@@ -23,7 +23,7 @@ public class Main {
 	}
 
 	public static List<Node> readSurvey() {
-		String csvFileSurvey = "/home/yaosa/Downloads/survey.csv";
+		String csvFileSurvey = "CSV Files/FSOSS Building Survey/survey.csv";
 
 		List<String> macs = new ArrayList<String>();
 		List<String> SSIDs = new ArrayList<String>();
@@ -73,7 +73,7 @@ public class Main {
 	}
 
 	public static List<ESPLocation> readLocations() {
-		String csvFileLocations = "/home/yaosa/Downloads/locations.csv";
+		String csvFileLocations = "CSV Files/FSOSS Building Survey/locations.csv";
 
 		long time = 0;
 		String MAC = "hello";
@@ -97,7 +97,7 @@ public class Main {
 					macs.clear();
 					SSIDs.clear();
 					Signal.clear();
-
+					
 				} else if (line.contains("Timestamp")){
 					time = Long.valueOf(line.substring(11));
 					
