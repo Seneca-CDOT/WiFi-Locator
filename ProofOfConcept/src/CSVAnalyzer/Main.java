@@ -21,7 +21,7 @@ public class Main {
 			//System.out.println(locations.get(i).toString());
 			//System.out.println(FuzzyLogic.CalcFuzzyLogic(nodes, locations));
 		}
-		//System.out.println("Logic results are = " + FuzzyLogic.CalcFuzzyLogic(nodes, locations));
+		System.out.println("Logic results are = " + FuzzyLogic.CalcFuzzyLogic(nodes, locations));
 
 	}
 
@@ -42,6 +42,7 @@ public class Main {
 			br = new BufferedReader(new FileReader(csvFileSurvey));
 			while ((line = br.readLine()) != null) {
 				// use comma as separator
+				
 				if (line.length() > 5) {
 					String[] csvline = line.split(",");
 					macs.add(csvline[0]);
@@ -50,10 +51,16 @@ public class Main {
 
 				} else {
 					Node node = new Node(survey.size(), macs, Signal, SSIDs);
+					System.out.println("Macs size = " + macs.size());
+					
 					survey.add(node);
-					macs.clear();
-					SSIDs.clear();
-					Signal.clear();
+					
+					macs = new ArrayList<String>();
+					SSIDs = new ArrayList<String>();
+					Signal = new ArrayList<String>();
+
+					
+
 				}
 			}
 
