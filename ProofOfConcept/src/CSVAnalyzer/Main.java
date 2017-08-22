@@ -99,7 +99,7 @@ public class Main {
 			while ((line = br.readLine()) != null) {
 				// use comma as separator
 				if (line.contains("Closest Node")) {
-					locations.add(new ESPLocation(time, MAC, macs, Signal, SSIDs));
+					locations.add(new ESPLocation(time, MAC, SSIDs, macs, Signal));
 					macs.clear();
 					SSIDs.clear();
 					Signal.clear();
