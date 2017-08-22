@@ -24,11 +24,12 @@ public class FuzzyLogic {
 			for (int j = 0; j < LocNode.get(k).MacAddrs.size(); j++) {
 				for (int i = 0; i < SurveyNode.size(); i++) {
 
-					if (LocNode.get(j).MacAddrs.contains(LocNode.get(k).MacAddrs.get(j))) {
+					if (SurveyNode.get(i).MacAddrs.contains(LocNode.get(k).MacAddrs.get(j))) {
 						
 						//We want the strength of the survey node in list i that contains the mac address of Location node j
+						//We want the stength of the survey node in list i that conatins the same mac address of location node j
 						
-						SurveyNodeStrength = Integer.parseInt(SurveyNode.get(i).NodeSignal.get(LocNode.get(j).MacAddrs.indexOf(SurveyNode.get(k).MacAddrs.get(i))));
+						SurveyNodeStrength = Integer.parseInt(SurveyNode.get(i).NodeSignal.get(LocNode.get(j).MacAddrs.indexOf(LocNode.get(k).MacAddrs.get(j))));
 						LocNodeStrength = Integer.parseInt(LocNode.get(k).Signal.get(j));
 
 						CurScore += Math.abs(SurveyNodeStrength - LocNodeStrength);
@@ -36,7 +37,7 @@ public class FuzzyLogic {
 				}
 
 				if (CurScore < BestScore) {
-					BestNode = LocNode.get(j).NodeNum;
+					BestNode = SurveyNode.get(j).NodeNum;
 					BestScore = CurScore;
 				}
 			}
