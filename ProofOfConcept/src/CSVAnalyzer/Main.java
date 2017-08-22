@@ -51,7 +51,6 @@ public class Main {
 
 				} else {
 					Node node = new Node(survey.size(), macs, Signal, SSIDs);
-					System.out.println("Macs size = " + macs.size());
 					
 					survey.add(node);
 					
@@ -63,6 +62,7 @@ public class Main {
 
 				}
 			}
+			survey.remove(0);
 
 			br.close();
 

@@ -16,6 +16,9 @@ public class FuzzyLogic {
 		int LocNodeStrength = 0;
 		List<Integer> output = new ArrayList<Integer>();
 		
+		System.out.println(SurveyNode.get(0).toString());
+		System.out.println(LocNode.get(0).toString());
+		
 		int CurScore = 0;
 		int BestNode = 0;
 		int BestScore = 999999;
@@ -42,7 +45,7 @@ public class FuzzyLogic {
 						SurveyNodeStrength = Integer.parseInt(SurveyNode.get(i).NodeSignal.get(SurveyNode.get(i).MacAddrs.indexOf(LocNode.get(k).MacAddrs.get(j))));
 						LocNodeStrength = Integer.parseInt(LocNode.get(k).Signal.get(j));
 
-						System.out.println("Survey node strength " + SurveyNodeStrength +" + "+LocNodeStrength+" = "+Math.abs(SurveyNodeStrength - LocNodeStrength));
+						//System.out.println("Survey node strength " + SurveyNodeStrength +" + "+LocNodeStrength+" = "+Math.abs(SurveyNodeStrength - LocNodeStrength));
 						
 						CurScore += Math.abs(SurveyNodeStrength - LocNodeStrength);
 					}
@@ -51,7 +54,7 @@ public class FuzzyLogic {
 					
 					
 				}
-				System.out.println("Current score "+CurScore);
+				System.out.println(i + "Current score "+CurScore);
 				if (CurScore < BestScore) {
 					BestNode = SurveyNode.get(i).NodeNum;
 					BestScore = CurScore;
