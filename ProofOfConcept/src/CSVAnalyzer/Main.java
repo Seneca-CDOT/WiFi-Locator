@@ -107,9 +107,9 @@ public class Main {
 				// use comma as separator
 				if (line.contains("Closest Node")) {
 					locations.add(new ESPLocation(time, MAC, SSIDs, macs, Signal));
-					macs.clear();
-					SSIDs.clear();
-					Signal.clear();
+					macs = new ArrayList<String>();
+					SSIDs = new ArrayList<String>();
+					Signal = new ArrayList<String>();
 					
 				} else if (line.contains("Timestamp")){
 					time = Long.valueOf(line.substring(11));
