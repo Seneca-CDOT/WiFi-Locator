@@ -11,14 +11,17 @@ public class Main {
 
 	public static void main(String[] args) {
 		List<Node> nodes = readSurvey();
+		for (int i = 0;i<nodes.size();i++) {
+			//System.out.println(nodes.get(i).toString());
+		}
 		
 
 		List<ESPLocation> locations = readLocations();
 		for (int i = 0; i < locations.size(); i++) {
-			System.out.println(locations.get(i).toString());
+			//System.out.println(locations.get(i).toString());
 			//System.out.println(FuzzyLogic.CalcFuzzyLogic(nodes, locations));
 		}
-		System.out.println("Logic results are = " + FuzzyLogic.CalcFuzzyLogic(nodes, locations));
+		//System.out.println("Logic results are = " + FuzzyLogic.CalcFuzzyLogic(nodes, locations));
 
 	}
 
@@ -39,14 +42,15 @@ public class Main {
 			br = new BufferedReader(new FileReader(csvFileSurvey));
 			while ((line = br.readLine()) != null) {
 				// use comma as separator
-				if (line.length() > 2) {
+				if (line.length() > 5) {
 					String[] csvline = line.split(",");
 					macs.add(csvline[0]);
 					SSIDs.add(csvline[1]);
 					Signal.add(csvline[2]);
 
 				} else {
-					survey.add(new Node(survey.size() + 1, macs, Signal, SSIDs));
+					Node node = new Node(survey.size(), macs, Signal, SSIDs);
+					survey.add(node);
 					macs.clear();
 					SSIDs.clear();
 					Signal.clear();
@@ -68,6 +72,8 @@ public class Main {
 				}
 			}
 		}
+		
+		System.out.println(survey.get(survey.size()-1).MacAddrs.size());
 		return survey;
 
 	}

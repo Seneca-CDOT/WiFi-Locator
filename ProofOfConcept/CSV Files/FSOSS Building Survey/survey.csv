@@ -1,4 +1,4 @@
-1
+1,,
 5E:CF:7F:19:98:54,ESP8266-Eagle,-47
 A8:BD:27:CF:1C:A0,SenecaGuest,-67
 70:3A:0E:5F:DC:40,SenecaGuest,-65
@@ -42,8 +42,7 @@ A8:BD:27:CF:86:C1,eduroam,-83
 A8:BD:27:CF:86:C2,SenecaNET,-83
 A8:BD:27:CF:83:20,SenecaGuest,-82
 A8:BD:27:CF:1C:A1,eduroam,-74
-
-2
+2,,
 A8:BD:27:CF:52:80,SenecaGuest,-67
 70:3A:0E:5F:DC:40,SenecaGuest,-79
 70:3A:0E:5F:DC:41,eduroam,-66
@@ -85,8 +84,7 @@ A8:BD:27:CF:1F:22,SenecaNET,-78
 A8:BD:27:CE:EC:21,eduroam,-76
 70:3A:0E:5F:B4:A0,SenecaGuest,-79
 40:D3:AE:2F:55:8C,SM-A520W0599,-67
-
-3
+3,,
 5E:CF:7F:19:98:54,ESP8266-Eagle,-49
 40:E3:D6:23:44:61,SenecaGuest,-79
 70:3A:0E:5F:DC:40,SenecaGuest,-59
@@ -128,8 +126,7 @@ A8:BD:27:CF:20:01,eduroam,-84
 A8:BD:27:CF:20:02,SenecaNET,-85
 70:3A:0E:5F:E9:40,SenecaGuest,-83
 5E:CF:7F:1A:06:1F,ESP8266-Dragon,-91
-
-4
+4,,
 40:E3:D6:23:44:61,SenecaGuest,-66
 40:E3:D6:23:44:62,eduroam,-62
 5E:CF:7F:19:98:54,ESP8266-Eagle,-56
@@ -165,8 +162,7 @@ A8:BD:27:CF:52:80,SenecaGuest,-62
 70:3A:0E:5F:DD:41,eduroam,-50
 70:3A:0E:5F:DD:42,SenecaNET,-45
 A8:BD:27:CF:52:82,SenecaNET,-60
-
-5
+5,,
 5E:CF:7F:19:98:54,ESP8266-Eagle,-44
 A8:BD:27:CF:1C:A1,eduroam,-61
 70:3A:0E:5F:DC:40,SenecaGuest,-57
@@ -199,8 +195,7 @@ A8:BD:27:CF:18:E1,eduroam,-75
 70:3A:0E:5F:EF:C0,SenecaGuest,-73
 70:3A:0E:5F:DD:42,SenecaNET,-43
 A8:BD:27:CE:F0:82,SenecaNET,-85
-
-6
+6,,
 A8:BD:27:CF:52:80,SenecaGuest,-66
 5E:CF:7F:19:98:54,ESP8266-Eagle,-55
 A8:BD:27:CF:52:81,eduroam,-67
@@ -258,8 +253,7 @@ A8:BD:27:CF:12:02,SenecaNET,-88
 A8:BD:27:CF:1C:A0,SenecaGuest,-70
 A8:BD:27:CF:1C:A1,eduroam,-70
 A8:BD:27:CF:89:21,eduroam,-83
-
-7
+7,,
 40:E3:D6:23:44:61,SenecaGuest,-67
 5E:CF:7F:19:98:54,ESP8266-Eagle,-60
 A8:BD:27:CF:1C:A0,SenecaGuest,-62
@@ -342,8 +336,7 @@ D8:C7:C8:E9:34:41,SenecaGuest,-82
 D8:C7:C8:E9:34:42,eduroam,-82
 70:3A:0E:5F:EF:C1,eduroam,-73
 A8:BD:27:CF:18:E2,SenecaNET,-61
-
-8
+8,,
 5E:CF:7F:19:98:54,ESP8266-Eagle,-68
 A8:BD:27:CF:1C:A0,SenecaGuest,-65
 A8:BD:27:CF:1C:A1,eduroam,-63
@@ -410,8 +403,7 @@ A8:BD:27:CF:1D:00,SenecaGuest,-79
 70:3A:0E:5F:E9:42,SenecaNET,-67
 24:DE:C6:4F:5E:F2,eduroam,-80
 40:E3:D6:23:44:64,SenecaNET,-64
-
-9
+9,,
 5E:CF:7F:19:98:54,ESP8266-Eagle,-59
 A8:BD:27:CF:1C:A0,SenecaGuest,-62
 A8:BD:27:CF:1C:A1,eduroam,-60
@@ -470,8 +462,7 @@ A8:BD:27:CF:20:C2,SenecaNET,-61
 A8:BD:27:CF:18:E0,SenecaGuest,-77
 70:3A:0E:5F:22:00,SenecaGuest,-68
 70:3A:0E:5F:C8:62,SenecaNET,-83
-
-10
+10,,
 5E:CF:7F:19:98:54,ESP8266-Eagle,-55
 40:E3:D6:23:44:62,eduroam,-60
 A8:BD:27:CF:1C:A0,SenecaGuest,-60
@@ -540,8 +531,7 @@ A8:BD:27:CF:18:E1,eduroam,-78
 A8:BD:27:CF:89:22,SenecaNET,-75
 70:3A:0E:5F:EE:40,SenecaGuest,-78
 70:3A:0E:5F:D3:A1,eduroam,-76
-
-11
+11,,
 70:3A:0E:5F:22:00,SenecaGuest,-57
 A8:BD:27:CF:1C:A1,eduroam,-55
 5E:CF:7F:19:98:54,ESP8266-Eagle,-58
@@ -602,8 +592,7 @@ A8:BD:27:CF:20:C2,SenecaNET,-55
 70:3A:0E:5F:B4:40,SenecaGuest,-71
 70:3A:0E:5F:EE:40,SenecaGuest,-76
 A8:BD:27:CF:18:01,eduroam,-78
-
-12
+12,,
 A8:BD:27:CF:89:20,SenecaGuest,-69
 A8:BD:27:CF:1C:A0,SenecaGuest,-49
 A8:BD:27:CF:89:21,eduroam,-74
@@ -671,8 +660,7 @@ A8:BD:27:CF:20:C1,eduroam,-62
 40:E3:D6:20:C3:24,SenecaNET,-85
 70:3A:0E:5F:22:02,SenecaNET,-66
 A8:BD:27:CE:3F:A2,SenecaNET,-85
-
-13
+13,,
 5E:CF:7F:1A:06:1F,ESP8266-Dragon,-70
 A8:BD:27:CF:89:20,SenecaGuest,-62
 70:3A:0E:5F:D3:A0,SenecaGuest,-53
@@ -737,8 +725,7 @@ A8:BD:27:CF:20:C2,SenecaNET,-54
 70:3A:0E:5F:C4:00,SenecaGuest,-82
 A8:BD:27:CF:18:E2,SenecaNET,-78
 40:E3:D6:23:44:64,SenecaNET,-81
-
-14
+14,,
 A8:BD:27:CF:1C:A0,SenecaGuest,-71
 5E:CF:7F:1A:06:1F,ESP8266-Dragon,-62
 70:3A:0E:5F:D3:A0,SenecaGuest,-50
@@ -795,8 +782,7 @@ A8:BD:27:CF:86:82,SenecaNET,-66
 40:E3:D6:20:C3:22,eduroam,-75
 A8:BD:27:CF:1A:A2,SenecaNET,-59
 A8:BD:27:CE:3F:A1,eduroam,-90
-
-15
+15,,
 70:3A:0E:5F:D3:A0,SenecaGuest,-46
 5E:CF:7F:C3:34:38,ESP8266-Carp,-69
 70:3A:0E:5F:D3:A1,eduroam,-47
@@ -850,8 +836,7 @@ A8:BD:27:CF:1A:A0,SenecaGuest,-71
 70:3A:0E:5F:22:02,SenecaNET,-87
 A8:BD:27:CF:53:82,SenecaNET,-83
 A8:BD:27:CF:3C:22,SenecaNET,-79
-
-16
+16,,
 70:3A:0E:5F:D3:A0,SenecaGuest,-50
 5E:CF:7F:1A:06:1F,ESP8266-Dragon,-58
 70:3A:0E:5F:D3:A1,eduroam,-63
@@ -910,8 +895,7 @@ A8:BD:27:CF:1A:A1,eduroam,-74
 A8:BD:27:CF:1A:A2,SenecaNET,-70
 70:3A:0E:5F:EF:C2,SenecaNET,-65
 A8:BD:27:CE:4A:C2,SenecaNET,-85
-
-17
+17,,
 40:E3:D6:23:40:61,SenecaGuest,-66
 5E:CF:7F:1A:06:1F,ESP8266-Dragon,-48
 70:3A:0E:5F:D3:A1,eduroam,-47
@@ -974,8 +958,7 @@ A8:BD:27:CF:20:C0,SenecaGuest,-68
 70:3A:0E:5F:EE:40,SenecaGuest,-88
 70:3A:0E:5F:DC:42,SenecaNET,-82
 40:E3:D6:23:44:62,eduroam,-89
-
-18
+18,,
 40:E3:D6:23:40:61,SenecaGuest,-66
 40:E3:D6:23:40:62,eduroam,-67
 A8:BD:27:CF:1C:A1,eduroam,-73
@@ -1041,8 +1024,7 @@ A8:BD:27:CF:1A:A1,eduroam,-78
 A8:BD:27:CF:1A:A2,SenecaNET,-71
 A8:BD:27:CF:1C:A0,SenecaGuest,-75
 A8:BD:27:CF:1F:21,eduroam,-84
-
-19
+19,,
 70:3A:0E:5F:D3:A0,SenecaGuest,-53
 70:3A:0E:5F:D3:A1,eduroam,-51
 70:3A:0E:5F:D3:A2,SenecaNET,-49
@@ -1119,8 +1101,7 @@ A8:BD:27:CF:1A:A2,SenecaNET,-56
 40:E3:D6:23:40:61,SenecaGuest,-70
 40:E3:D6:23:40:62,eduroam,-72
 40:E3:D6:23:44:64,SenecaNET,-81
-
-20
+20,,
 70:3A:0E:5F:D3:A0,SenecaGuest,-55
 70:3A:0E:5F:D3:A1,eduroam,-55
 70:3A:0E:5F:D3:A2,SenecaNET,-51
@@ -1200,8 +1181,7 @@ A8:BD:27:CF:83:21,eduroam,-88
 40:E3:D6:23:44:62,eduroam,-85
 A8:BD:27:CF:18:02,SenecaNET,-69
 A8:BD:27:CE:EE:42,SenecaNET,-83
-
-21
+21,,
 A8:BD:27:CF:18:00,SenecaGuest,-72
 A8:BD:27:CF:1C:A1,eduroam,-62
 5E:CF:7F:1A:06:1F,ESP8266-Dragon,-67
@@ -1278,8 +1258,7 @@ A8:BD:27:CF:86:81,eduroam,-74
 A8:BD:27:CF:3C:22,SenecaNET,-69
 5E:CF:7F:C3:34:38,ESP8266-Carp,-69
 70:3A:0E:5F:22:00,SenecaGuest,-80
-
-22
+22,,
 5E:CF:7F:1A:06:1F,ESP8266-Dragon,-66
 A8:BD:27:CF:1C:A0,SenecaGuest,-65
 A8:BD:27:CF:1C:A1,eduroam,-68
@@ -1356,8 +1335,7 @@ A8:BD:27:CF:20:C0,SenecaGuest,-59
 A8:BD:27:CF:20:C1,eduroam,-59
 70:3A:0E:5F:DD:40,SenecaGuest,-78
 A8:BD:27:CF:18:00,SenecaGuest,-70
-
-23
+23,,
 A8:BD:27:CF:1C:A0,SenecaGuest,-47
 A8:BD:27:CF:1C:A2,SenecaNET,-50
 A8:BD:27:CF:18:01,eduroam,-62
@@ -1426,8 +1404,7 @@ A8:BD:27:CF:20:C2,SenecaNET,-49
 A8:BD:27:CF:1A:A1,eduroam,-72
 A8:BD:27:CE:4A:C1,eduroam,-86
 70:3A:0E:5F:D3:A2,SenecaNET,-61
-
-24
+24,,
 5E:CF:7F:C3:34:38,ESP8266-Carp,-44
 70:3A:0E:5F:EE:40,SenecaGuest,-62
 5E:CF:7F:C6:D5:05,ESP8266-Aardvark,-70
@@ -1489,8 +1466,7 @@ A8:BD:27:CF:20:C2,SenecaNET,-60
 70:3A:0E:5F:DD:40,SenecaGuest,-73
 70:3A:0E:5F:C4:02,SenecaNET,-76
 70:3A:0E:5F:22:01,eduroam,-71
-
-25
+25,,
 A8:BD:27:CE:3F:A1,eduroam,-78
 A8:BD:27:CF:86:A2,SenecaNET,-61
 5E:CF:7F:19:98:54,ESP8266-Eagle,-76
@@ -1564,8 +1540,7 @@ A8:BD:27:CF:35:A1,eduroam,-87
 A8:BD:27:CF:86:81,eduroam,-74
 A8:BD:27:CF:86:82,SenecaNET,-75
 A8:BD:27:CF:54:A0,SenecaGuest,-82
-
-26
+26,,
 40:E3:D6:23:44:61,SenecaGuest,-70
 A8:BD:27:CF:86:A1,eduroam,-66
 70:3A:0E:5F:DC:41,eduroam,-65
@@ -1643,8 +1618,7 @@ A8:BD:27:CF:54:A2,SenecaNET,-82
 24:DE:C6:4F:5E:F2,eduroam,-88
 A8:BD:27:CF:86:C0,SenecaGuest,-82
 A8:BD:27:CF:86:C1,eduroam,-79
-
-27
+27,,
 40:E3:D6:23:40:61,SenecaGuest,-52
 40:E3:D6:23:40:62,eduroam,-53
 40:E3:D6:23:40:64,SenecaNET,-57
@@ -1719,8 +1693,7 @@ A8:BD:27:CF:20:C0,SenecaGuest,-67
 70:3A:0E:5F:D3:A0,SenecaGuest,-73
 70:3A:0E:5F:D3:A1,eduroam,-77
 70:3A:0E:5F:D3:A2,SenecaNET,-69
-
-28
+28,,
 D8:C7:C8:E9:27:11,SenecaGuest,-77
 D8:C7:C8:E9:27:12,eduroam,-80
 40:E3:D6:23:40:61,SenecaGuest,-61
@@ -1787,4 +1760,3 @@ A8:BD:27:CF:54:A2,SenecaNET,-76
 70:3A:0E:5F:EF:C0,SenecaGuest,-75
 70:3A:0E:5F:EF:C1,eduroam,-73
 70:3A:0E:5F:D3:A0,SenecaGuest,-73
-
