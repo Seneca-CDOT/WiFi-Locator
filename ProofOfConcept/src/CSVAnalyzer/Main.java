@@ -11,14 +11,14 @@ public class Main {
 
 	public static void main(String[] args) {
 		List<Node> nodes = readSurvey();
-		for (int i = 0; i < nodes.size(); i++) {
-			System.out.println(nodes.get(i).toString());
-		}
+		
 
 		List<ESPLocation> locations = readLocations();
 		for (int i = 0; i < locations.size(); i++) {
 			System.out.println(locations.get(i).toString());
+			//System.out.println(FuzzyLogic.CalcFuzzyLogic(nodes, locations));
 		}
+		System.out.println("Logic results are = " + FuzzyLogic.CalcFuzzyLogic(nodes, locations));
 
 	}
 

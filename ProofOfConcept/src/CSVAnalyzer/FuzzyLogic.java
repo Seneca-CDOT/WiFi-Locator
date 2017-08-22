@@ -11,42 +11,40 @@ import java.util.List;
 
 public class FuzzyLogic {
 
-	public static List<Integer> CalcFuzzyLogic(List<Node> LocNode, List<ESPLocation> CurNode)
-	{
+	public static List<Integer> CalcFuzzyLogic(List<Node> SurveyNode, List<ESPLocation> LocNode) {
+		int SurveyNodeStrength = 0;
 		int LocNodeStrength = 0;
-		int CurNodeStrength = 0;
 		List<Integer> output = new ArrayList<Integer>();
 
-		for(int k = 0; k < CurNode.size(); k++)
-		{
+		for (int k = 0; k < LocNode.size(); k++) {
 			int CurScore = 0;
 			int BestNode = 0;
 			int BestScore = 999999;
-			
-			for(int j = 0; j < LocNode.size(); j++)
-			{
-				for(int i = 0; i < CurNode.get(k).MacAddrs.size(); i++)
-				{
-					if(LocNode.get(j).MacAddrs.contains(CurNode.get(k).MacAddrs.get(i)))
-					{
-						LocNodeStrength = Integer.parseInt(LocNode.get(j).NodeSignal.get(LocNode.get(j).MacAddrs.indexOf(CurNode.get(k).MacAddrs.get(i))));
-						CurNodeStrength = Integer.parseInt(CurNode.get(k).Signal.get(i));
 
-						CurScore += Math.abs(LocNodeStrength - CurNodeStrength);
+			for (int j = 0; j < LocNode.get(k).MacAddrs.size(); j++) {
+				for (int i = 0; i < SurveyNode.size(); i++) {
+
+					if (LocNode.get(j).MacAddrs.contains(LocNode.get(k).MacAddrs.get(j))) {
+						
+						//We want the strength of the survey node in list i that contains the mac address of Location node j
+						
+						SurveyNodeStrength = Integer.parseInt(SurveyNode.get(i).NodeSignal.get(LocNode.get(j).MacAddrs.indexOf(SurveyNode.get(k).MacAddrs.get(i))));
+						LocNodeStrength = Integer.parseInt(LocNode.get(k).Signal.get(j));
+
+						CurScore += Math.abs(SurveyNodeStrength - LocNodeStrength);
 					}
 				}
-				
-				if(CurScore < BestScore)
-				{
-					BestNode = j;
+
+				if (CurScore < BestScore) {
+					BestNode = LocNode.get(j).NodeNum;
 					BestScore = CurScore;
 				}
 			}
-			
+
 			output.add(BestNode);
-			
+
 		}
-		
+
 		return output;
 
 	}
