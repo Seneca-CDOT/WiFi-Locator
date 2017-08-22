@@ -111,7 +111,7 @@ public class Main {
 
 							counter++;
 						}
-						CurScore += 5;
+						//CurScore += 5;
 					}
 
 					System.out.println("Finished Calc of Node " + (i+1));
