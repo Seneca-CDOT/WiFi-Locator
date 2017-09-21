@@ -12,7 +12,7 @@ public class ESPLocation {
 	List<String> Signal;
 
 	public ESPLocation(long time, String MACAddress, List<String> ssid, List<String> mac, List<String> signal) {
-		timestamp = time;
+		this.timestamp = time;
 		this.mac = MACAddress;
 		this.SSID = ssid;
 		this.MacAddrs = mac;

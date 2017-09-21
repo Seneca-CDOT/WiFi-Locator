@@ -67,6 +67,7 @@ public class Main {
 		createCSV.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("CSV Button pressed");
+				System.out.println(nodes);
 
 				// Only writes Nodes
 				CSV csv = new CSV(nodes);

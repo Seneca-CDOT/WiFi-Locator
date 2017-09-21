@@ -15,5 +15,14 @@ public class Node {
 		NodeSignal = Strength;
 		SSID = ID;
 	}
+	
+	@Override
+	public String toString() {
+		return "Node Number: " + NodeNum + "\n"
+		      +"Mac Address: " + MacAddrs + "\n"
+		      +"NodeSignal : " + NodeSignal + "\n"
+		      +"      SSID : " + SSID + "\n";
+	}
+	
 
 }
