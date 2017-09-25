@@ -17,28 +17,33 @@ public class CSV {
 	public void writeFile() {
 		try {
 			String dir = System.getProperty("user.dir");
-			File survey = new File(dir + "survey.csv");
+			File survey = new File("survey.csv");
 			PrintWriter output = new PrintWriter(survey);
 
-			output.write("NodeNum");
+			output.write("NodeID");
 			output.write(",");
 			output.write("Mac");
 			output.write(",");
 			output.write("SSID");
 			output.write(",");
 			output.write("SignalStrength");
+			output.write(",");
+			output.write("NodeScore");
+			
 			output.write("\n");
 			
 			for (int i = 0; i < list.size(); i++) {
 
 				for (int j = 0; j < list.get(i).esp.size(); j++) {
-					output.write(String.valueOf(i + 1));
+					output.write(String.valueOf(list.get(i).id));
 					output.write(",");
 					output.write(String.valueOf(list.get(i).esp.get(j).macAddrs));
 					output.write(",");
 					output.write(String.valueOf(list.get(i).esp.get(j).SSID));
 					output.write(",");
 					output.write(String.valueOf(list.get(i).esp.get(j).signalStrength));
+					output.write(",");
+					output.write(String.valueOf(list.get(i).score));
 					output.write("\n");
 				}
 				output.write("\n");

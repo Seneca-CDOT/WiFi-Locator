@@ -3,11 +3,11 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="libs/neuroph-core-2.94.jar"/>
-	<classpathentry kind="lib" path="/home/yaosa/Documents/WiFi-Locator/javaml-0.1.7/javaml-0.1.7.jar"/>
-	<classpathentry kind="lib" path="/home/yaosa/Documents/WiFi-Locator/javaml-0.1.7/lib/ajt-2.9.jar"/>
-	<classpathentry kind="lib" path="/home/yaosa/Documents/WiFi-Locator/javaml-0.1.7/lib/commons-math-1.2.jar"/>
-	<classpathentry kind="lib" path="/home/yaosa/Documents/WiFi-Locator/javaml-0.1.7/lib/Jama-1.0.2.jar"/>
-	<classpathentry kind="lib" path="/home/yaosa/Documents/WiFi-Locator/javaml-0.1.7/lib/libsvm.jar"/>
-	<classpathentry kind="lib" path="/home/yaosa/Documents/WiFi-Locator/javaml-0.1.7/lib/weka.jar"/>
+	<classpathentry kind="lib" path="/usr/share/peapod/WiFi-Locator/javaml-0.1.7/javaml-0.1.7.jar"/>
+	<classpathentry kind="lib" path="/usr/share/peapod/WiFi-Locator/javaml-0.1.7/lib/weka.jar"/>
+	<classpathentry kind="lib" path="/usr/share/peapod/WiFi-Locator/javaml-0.1.7/lib/libsvm.jar"/>
+	<classpathentry kind="lib" path="/usr/share/peapod/WiFi-Locator/javaml-0.1.7/lib/Jama-1.0.2.jar"/>
+	<classpathentry kind="lib" path="/usr/share/peapod/WiFi-Locator/javaml-0.1.7/lib/commons-math-1.2.jar"/>
+	<classpathentry kind="lib" path="/usr/share/peapod/WiFi-Locator/javaml-0.1.7/lib/ajt-2.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

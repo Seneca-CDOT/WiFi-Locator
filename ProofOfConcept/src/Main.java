@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Main {
@@ -93,8 +94,7 @@ public class Main {
 				System.out.println("Initiated Node Registration");
 				System.out.println("===========================");
 				// Gets node and places it in ReadSerial
-				List<ESPDevice> foundDevices = SerialReader.read(false);
-				
+				List<ESPDevice> foundDevices = SerialReader.read(false);			
 				// Check for duplicates
 				nodes.add(new Node(foundDevices));
 				System.out.println("\n++ ++ ++ ++ ++ ++ ++ ++ ++ ++");
@@ -114,7 +114,7 @@ public class Main {
 				System.out.println("============================");
 
 				// Gets a "Node" of the current location
-				List<ESPDevice> UPos = SerialReader.read(false);
+				List<ESPDevice> UPos = SerialReader.read(true);
 				
 				System.out.println("\n++ ++ ++ ++ ++ ++ ++ ++ +++");
 				System.out.println("++ Retrieved new Signals ++");
@@ -122,9 +122,9 @@ public class Main {
 				System.out.println("++ ++ ++ ++ ++ ++ ++ ++ ++ ++");
 
 				// Vars needed
-				int closestNode = 0;
 				double bestScore = 10000;
-				int weight = 5;
+				int penalty = 0;
+				int penaltyFactor = 5;
 				
 				Node curNode;
 
@@ -135,12 +135,13 @@ public class Main {
 				for (int i = 0; i < nodes.size(); i++) {  // for each node-survey 
 					
 					List<Double> curScores = new ArrayList<>();
-					
+
+					curNode = nodes.get(i);
+					curNode.id = i + 1; 
 					System.out.println("++ ++ ++ ++ ++");
 					System.out.println("++ Node : " + (i+1));
 					
 					for (int j = 0; j < UPos.size(); j++) {   // for each device 
-						curNode = nodes.get(i);
 
 						if (curNode.esp.contains(UPos.get(j))){
 	
@@ -149,26 +150,36 @@ public class Main {
 
 							System.out.println("Calc " + j + " = " + diff + " ESSID of " + UPos.get(j).SSID);
 
-							curScores.add((double)diff + weight);
+							curScores.add((double)diff);
 						} else {
-							curScores.add((double)weight);
+							System.out.println("Not found...");
+							//double avgScore = curScores.stream().mapToDouble(d -> d).average().orElse(999);
+							//curScores.add(avgScore);
+							penalty += penaltyFactor;
 						}
 					}
 
 					System.out.println("Finished Calc of Node " + (i+1));
 
 					double avgScore = curScores.stream().mapToDouble(d -> d).average().orElse(999);
+					if (penalty > 0) {
+						curScores.add(avgScore + penalty);
+						avgScore = curScores.stream().mapToDouble(d -> d).average().orElse(999);	
+					}
+					curNode.score = avgScore;
 
 					System.out.println("Calculated score: " + avgScore + "\n");
 					if (avgScore < bestScore) {
 						bestScore = avgScore;
-						closestNode = i + 1;
 					}
 				}
-				System.out.println("Closest Node Is " + closestNode);
+				
+				ArrayList<Node> sortedNodes = new ArrayList<Node>(nodes);
+				Collections.sort(sortedNodes);
+				System.out.println("Closest Node Is " + sortedNodes.get(0).id);
 
-				LocationDump location = new LocationDump(UPos, closestNode);
-				location.writeFile();
+				CSV csv = new CSV(sortedNodes);
+				csv.writeFile();
 
 			}
 		});

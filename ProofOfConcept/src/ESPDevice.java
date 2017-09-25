@@ -27,7 +27,7 @@ public class ESPDevice implements Comparable<ESPDevice> {
 	    }
 
 	    ESPDevice that = (ESPDevice)c;
-	    return this.macAddrs.equals(that.macAddrs) && this.macAddrs.equals(that.macAddrs);
+	    return this.macAddrs.equals(that.macAddrs);
 	}
 	
 	@Override

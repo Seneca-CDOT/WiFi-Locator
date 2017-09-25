@@ -1,7 +1,9 @@
 import java.util.List;
 
-public class Node {
+public class Node implements Comparable<Node> {
 	List<ESPDevice> esp;
+	public double score;
+	public int id;
 	
 	public Node (List <ESPDevice> esp) {
 		this.esp = esp;
@@ -12,4 +14,12 @@ public class Node {
 		return esp.toString();
 	}
 
+	@Override
+	public int compareTo(Node anotherDevice)  {
+		if (!(anotherDevice instanceof Node))
+			throw new ClassCastException("A Node object expected.");
+	  
+		
+		return this.score > anotherDevice.score ? 1 : -1;    
+	}
 }
