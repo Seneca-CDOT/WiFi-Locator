@@ -1,7 +1,13 @@
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.io.PrintWriter;
+import java.util.Scanner;
+
+
 
 /**
  * @author sammydamdam
@@ -13,12 +19,66 @@ public class CSV {
 		this.list = list;
 
 	}
+	
+	/** 
+	 *  Load Previously detected nodes
+	 *  
+	 * */
+	public List<Node> readFile(String filename) {
+		File file= new File(filename);
 
-	public void writeFile() {
+        List<List<String>> lines = new ArrayList<>();
+        Scanner inputStream;
+
+        // Read lines from CSV
+        try{
+            inputStream = new Scanner(file);
+
+            while(inputStream.hasNext()){
+                String line= inputStream.next();
+                String[] values = line.split(",");
+                lines.add(Arrays.asList(values));
+            }
+            System.out.println(lines);
+            inputStream.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        
+        List<ESPDevice> devices = new ArrayList<ESPDevice>();
+        int prevLineId = 1;
+        
+        // Parse lines into Node list
+        for(int i =1; i < lines.size(); i++) {	
+        	
+        	ESPDevice esp = new ESPDevice(0, lines.get(i).get(1), Integer.parseInt(lines.get(i).get(3)), lines.get(i).get(2));
+        	
+        	// Belongs to the same Node
+        	if (prevLineId == Integer.parseInt(lines.get(i).get(0)) && (i != lines.size()-1)) {
+        		devices.add(esp);
+        		
+        	} else { // Belongs to the same Node
+        		if (i == lines.size()-1) {
+        			devices.add(esp);
+        		}
+
+        		Node n = new Node(new ArrayList<ESPDevice>(devices));
+        		n.id = prevLineId;
+        		list.add(n);
+        		
+        		prevLineId = Integer.parseInt(lines.get(i).get(0));
+        		devices.clear();
+        		devices.add(esp);
+        	}
+        }
+        
+        return list;
+	}
+
+	public void writeFile(String filename) {
 		try {
-			String dir = System.getProperty("user.dir");
-			File survey = new File("survey.csv");
-			PrintWriter output = new PrintWriter(survey);
+			File survey = new File(filename);
+			FileWriter output = new FileWriter(survey, false);
 
 			output.write("NodeID");
 			output.write(",");

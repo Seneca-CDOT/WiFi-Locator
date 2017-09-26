@@ -1,4 +1,5 @@
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.*;
 
@@ -13,10 +14,12 @@ import java.util.List;
 public class Main {
 	
 	static List<Node> nodes    = new ArrayList<Node>();
+	static int surveyNum = 0; 
 
 	public static void printSurvey () {
 		for (int i = 0; i < nodes.size(); i++ ) {
-			System.out.println(">> Node Numer: " + (i + 1) + "  >>");
+			System.out.println(">> Node ID        : " + nodes.get(i).id);
+			System.out.println(">> Num of Devices : " + nodes.get(i).esp.size());
 			System.out.println(nodes.get(i));
 		}
 	}
@@ -30,10 +33,11 @@ public class Main {
 		JButton saveNode = new JButton();
 		JButton findLocation = new JButton();
 		JButton createCSV  = new JButton();
+		JButton loadCSV  = new JButton();
 		JButton clearNodes = new JButton();	
 		
 		// JPane to hold the buttons on the window
-		JPanel pane = new JPanel();
+		JPanel pane = new JPanel(new FlowLayout());
 
 		// Setup window
 		window.setSize(275, 300);
@@ -52,12 +56,15 @@ public class Main {
 
 		createCSV.setText("Create CSV");
 		createCSV.setPreferredSize(new Dimension(200, 40));
-		
+
+		loadCSV.setText("Load CSV");
+		loadCSV.setPreferredSize(new Dimension(200, 40));
 		
 		// add buttons to pane
 		pane.add(saveNode);
 		pane.add(findLocation);
 		pane.add(createCSV);
+		pane.add(loadCSV);
 		pane.add(clearNodes);
 		
 
@@ -71,8 +78,8 @@ public class Main {
 				System.out.println("======================");
 				System.out.println("Dropping all the Nodes");
 				System.out.println("======================");
-
-				// Check for duplicates
+				
+				surveyNum = 0;
 				nodes.clear();
 			}
 		});
@@ -83,7 +90,18 @@ public class Main {
 				System.out.println("CSV Button pressed");
 				// Only writes Nodes
 				CSV csv = new CSV(nodes);
-				csv.writeFile();
+				csv.writeFile("registered_nodes.csv");
+			}
+		});
+		
+		// CSV dump actionlistener
+		loadCSV.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Load CSV Button pressed");
+				
+				CSV csv = new CSV(nodes);
+				nodes = csv.readFile("registered_nodes.csv");
+				printSurvey();
 			}
 		});
 		
@@ -94,9 +112,12 @@ public class Main {
 				System.out.println("Initiated Node Registration");
 				System.out.println("===========================");
 				// Gets node and places it in ReadSerial
-				List<ESPDevice> foundDevices = SerialReader.read(false);			
-				// Check for duplicates
-				nodes.add(new Node(foundDevices));
+				List<ESPDevice> foundDevices = SerialReader.read(false);	
+				
+				Node n = new Node(foundDevices);
+				n.id = nodes.size() + 1;
+				nodes.add(n);
+				
 				System.out.println("\n++ ++ ++ ++ ++ ++ ++ ++ ++ ++");
 				System.out.println("++ All Registered Devices ++");
 				printSurvey();
@@ -108,13 +129,15 @@ public class Main {
 		// Find nearest node actionlistener
 		findLocation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				surveyNum++;
 				// Fuzzy logic comparison
 				System.out.println("============================");
 				System.out.println("Searching for Node Locations");
 				System.out.println("============================");
 
 				// Gets a "Node" of the current location
-				List<ESPDevice> UPos = SerialReader.read(true);
+				List<ESPDevice> UPos = SerialReader.read(false);
 				
 				System.out.println("\n++ ++ ++ ++ ++ ++ ++ ++ +++");
 				System.out.println("++ Retrieved new Signals ++");
@@ -136,8 +159,7 @@ public class Main {
 					
 					List<Double> curScores = new ArrayList<>();
 
-					curNode = nodes.get(i);
-					curNode.id = i + 1; 
+					curNode = nodes.get(i); 
 					System.out.println("++ ++ ++ ++ ++");
 					System.out.println("++ Node : " + (i+1));
 					
@@ -179,7 +201,7 @@ public class Main {
 				System.out.println("Closest Node Is " + sortedNodes.get(0).id);
 
 				CSV csv = new CSV(sortedNodes);
-				csv.writeFile();
+				csv.writeFile("node_scores_" + surveyNum + ".csv");
 
 			}
 		});

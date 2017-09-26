@@ -22,4 +22,14 @@ public class Node implements Comparable<Node> {
 		
 		return this.score > anotherDevice.score ? 1 : -1;    
 	}
+	
+	@Override
+	public boolean equals(Object c) {
+	    if((c instanceof Node) == false) {
+	        return false;
+	    }
+
+	    Node that = (Node)c;
+	    return this.id == that.id;
+	}
 }
