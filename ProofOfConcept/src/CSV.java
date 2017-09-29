@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.SortedSet;
 
 
 
@@ -73,6 +74,76 @@ public class CSV {
         }
         
         return list;
+	}
+	
+	public void createReport(String filename, SortedSet<String> ap, List<Node> mystery) {
+		try {
+			File survey = new File(filename);
+			FileWriter output = new FileWriter(survey, false);
+
+			/* Access Points */
+			
+			output.write("AP");
+			
+			for (String a : ap) {
+				output.write(",");
+				output.write(a);
+			}
+			
+			output.write("\n");
+			output.write("Node");
+			output.write("\n");
+			for (int i = 0; i < list.size(); i++) {
+				output.write(String.valueOf(list.get(i).id));
+				
+				for (String a : ap ) {
+					boolean found = false;
+					for (int j = 0; j < list.get(i).esp.size(); j++) {
+						if (a.equals(list.get(i).esp.get(j).SSID)){
+							output.write(",");
+							output.write(String.valueOf(list.get(i).esp.get(j).signalStrength));
+							found = true;
+							break;
+						} 
+					}
+					if (!found) {
+						output.write(",");
+					}
+				}
+				
+				output.write("\n");
+			}
+			
+			output.write("Mystery");
+			output.write("\n");
+			
+			for (int i = 0; i < mystery.size(); i++) {
+				output.write(String.valueOf(i + 1));
+				
+				for (String a : ap ) {
+					boolean found = false;
+					for (int j = 0; j < mystery.get(i).esp.size(); j++) {
+						if (a.equals(mystery.get(i).esp.get(j).SSID)){
+							output.write(",");
+							output.write(String.valueOf(mystery.get(i).esp.get(j).signalStrength));
+							found = true;
+							break;
+						} 
+					}
+					if (!found) {
+						output.write(",");
+					}
+				}
+				
+				output.write("\n");
+			}
+			
+			System.out.println("data is in file");
+			output.close();
+		} catch (IOException e) {
+
+		}
+		
 	}
 
 	public void writeFile(String filename) {

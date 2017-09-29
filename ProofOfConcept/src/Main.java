@@ -9,11 +9,19 @@ import javax.swing.JPanel;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class Main {
 	
-	static List<Node> nodes    = new ArrayList<Node>();
+	static List<Node> nodes      = new ArrayList<Node>();
+	static List<Node> mystery    = new ArrayList<Node>();
+	/* Access points */
+	static SortedSet<String> ap = new TreeSet<String>();
+	
 	static int surveyNum = 0; 
 
 	public static void printSurvey () {
@@ -32,6 +40,7 @@ public class Main {
 		// Make buttons
 		JButton saveNode = new JButton();
 		JButton findLocation = new JButton();
+		JButton report  = new JButton();
 		JButton createCSV  = new JButton();
 		JButton loadCSV  = new JButton();
 		JButton clearNodes = new JButton();	
@@ -53,6 +62,9 @@ public class Main {
 	
 		findLocation.setText("Find Location");
 		findLocation.setPreferredSize(new Dimension(200, 40));
+		
+		report.setText("Generate Report");
+		report.setPreferredSize(new Dimension(200, 40));
 
 		createCSV.setText("Create CSV");
 		createCSV.setPreferredSize(new Dimension(200, 40));
@@ -66,11 +78,21 @@ public class Main {
 		pane.add(createCSV);
 		pane.add(loadCSV);
 		pane.add(clearNodes);
-		
+		pane.add(report);
 
 		// add pane to window
 		window.add(pane);
 		
+		report.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("======================");
+				System.out.println("Generating Report");
+				System.out.println("======================");
+				
+				CSV csv = new CSV(nodes);
+				csv.createReport("REPORT.csv", ap, mystery);
+			}
+		});
 		
 		// Create New Node action listener
 		clearNodes.addActionListener(new ActionListener() {
@@ -113,7 +135,9 @@ public class Main {
 				System.out.println("===========================");
 				// Gets node and places it in ReadSerial
 				List<ESPDevice> foundDevices = SerialReader.read(false);	
-				
+				for (ESPDevice d : foundDevices){
+					ap.add(d.SSID);
+				}
 				Node n = new Node(foundDevices);
 				n.id = nodes.size() + 1;
 				nodes.add(n);
@@ -135,9 +159,10 @@ public class Main {
 				System.out.println("============================");
 				System.out.println("Searching for Node Locations");
 				System.out.println("============================");
-
+				
 				// Gets a "Node" of the current location
 				List<ESPDevice> UPos = SerialReader.read(false);
+				mystery.add(new Node(UPos));
 				
 				System.out.println("\n++ ++ ++ ++ ++ ++ ++ ++ +++");
 				System.out.println("++ Retrieved new Signals ++");
@@ -161,7 +186,7 @@ public class Main {
 
 					curNode = nodes.get(i); 
 					System.out.println("++ ++ ++ ++ ++");
-					System.out.println("++ Node : " + (i+1));
+					System.out.println("++ Node : " + nodes.get(i).id);
 					
 					for (int j = 0; j < UPos.size(); j++) {   // for each device 
 
@@ -200,8 +225,9 @@ public class Main {
 				Collections.sort(sortedNodes);
 				System.out.println("Closest Node Is " + sortedNodes.get(0).id);
 
-				CSV csv = new CSV(sortedNodes);
-				csv.writeFile("node_scores_" + surveyNum + ".csv");
+				CSV csv = new CSV(sortedNodes); 
+				csv.writeFile("s" + surveyNum + ".csv");
+				
 
 			}
 		});
